@@ -41,9 +41,9 @@ class LibraryTest {
         libraryManagementSystem = new LibraryManagementSystem();
     }
 
-    @DisplayName("Should print the default library book list correctly")
+    @DisplayName("Should get the default library book list correctly")
     @Test
-    void shouldPrintDefaultLibraryBookList() {
+    void shouldGetDefaultLibraryBookList() {
         assertEquals(new Library().getLibraryBookDetails(), new ArrayList<>(Arrays.asList("The Hobbit | Tolkien | 1954", "The Lord Of The Rings | Tolkien | 1954")));
     }
 }

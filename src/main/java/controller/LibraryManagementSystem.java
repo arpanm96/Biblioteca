@@ -1,5 +1,6 @@
 package controller;
 
+import common.Message;
 import model.Library;
 import view.InputDriver;
 import view.OutputDriver;
@@ -24,13 +25,24 @@ public class LibraryManagementSystem {
 
     public void displayMenu() {
         outputDriver.printMainMenu();
-        int choice = inputDriver.getMenuChoiceFromUser();
-        displayMenuChoice(choice);
+        int choice = 0;
+        while ((choice = inputDriver.getMenuChoiceFromUser()) != 1) {
+            if(isValidInput(choice)){
+                displayMenuChoice(choice);
+            }
+            else {
+                System.out.println(Message.INVALID_INPUT);
+            }
+        }
+    }
+
+    public boolean isValidInput(int choice) {
+        return choice <= MainMenu.values().length && choice >= 1;
     }
 
 
     public void displayMenuChoice(int choice) {
-        MainMenu.values()[choice-1].displayMenu(library);
+        MainMenu.values()[choice-1].act(library);
     }
 
     public void displayInitial() {

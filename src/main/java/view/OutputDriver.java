@@ -2,7 +2,6 @@ package view;
 
 import common.*;
 import controller.MainMenu;
-import model.Book;
 
 import java.util.List;
 
