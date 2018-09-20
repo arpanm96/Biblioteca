@@ -38,12 +38,12 @@ class LibraryTest {
         bookList.addAll(Arrays.asList(theHobbit, theLordOfTheRings));
 
         library = new Library(bookList);
-        libraryManagementSystem = new LibraryManagementSystem(outputMockDriver);
+        libraryManagementSystem = new LibraryManagementSystem();
     }
 
-    @DisplayName("Should print library book list correctly")
+    @DisplayName("Should print the default library book list correctly")
     @Test
-    void shouldPrintLibraryBookList() {
-        assertEquals(new Library().getTitlesList(), new ArrayList<>(Arrays.asList("The Hobbit", "The Lord Of The Rings")));
+    void shouldPrintDefaultLibraryBookList() {
+        assertEquals(new Library().getLibraryBookDetails(), new ArrayList<>(Arrays.asList("The Hobbit | Tolkien | 1954", "The Lord Of The Rings | Tolkien | 1954")));
     }
 }

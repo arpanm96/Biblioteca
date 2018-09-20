@@ -1,31 +1,41 @@
 package controller;
 
 import model.Library;
-import model.Book;
+import view.InputDriver;
 import view.OutputDriver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 /*
 A class to drive together the whole library management system
 */
 
 public class LibraryManagementSystem {
+    private InputDriver inputDriver;
     private OutputDriver outputDriver;
+    private Library library;
 
-    public LibraryManagementSystem(OutputDriver outputDriver) {
+    public LibraryManagementSystem() {
+        this.inputDriver = new InputDriver();
         this.outputDriver = new OutputDriver();
+        library = new Library();
     }
 
-    public static void main(String[] args) {
-        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(new OutputDriver());
-        Library library = new Library(new ArrayList<>(Arrays.asList(new Book("The Hobbit", "Tolkien", 1954))));
-        libraryManagementSystem.displayInitial(library);
+    public void displayMenu() {
+        outputDriver.printMainMenu();
+        int choice = inputDriver.getMenuChoiceFromUser();
+        displayMenuChoice(choice);
     }
 
-    private void displayInitial(Library library) {
+
+    public void displayMenuChoice(int choice) {
+        MainMenu.values()[choice-1].displayMenu(library);
+    }
+
+    public void displayInitial() {
         outputDriver.printWelcomeMessage();
-        outputDriver.printBookList(library);
+        List<String> list = new ArrayList<>(library.getLibraryBookDetails());
+        outputDriver.printBookList(list);
     }
 }

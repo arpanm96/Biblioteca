@@ -1,5 +1,6 @@
 package model;
 
+
 public class Book {
     private String title;
     private String author;
@@ -12,7 +13,8 @@ public class Book {
         this.yearPublished = yearPublished;
     }
 
-    public String getTitle() {
-        return title;
+    @Override
+    public String toString() {
+        return String.format("%-25s %8s %8s", title, author, yearPublished);
     }
 }
