@@ -11,17 +11,25 @@ class BookTest {
     Book booksMock1;
     Book booksMock2;
     Book theHobbit;
+    Book theLordOfTheRings;
 
     @BeforeEach
     void initEach() {
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
-        theHobbit = new Book("The Hobbit");
+        theHobbit = new Book("The Hobbit", "Tolkien", 1954);
+        theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
     }
 
     @DisplayName("should print the hobbit book")
     @Test
     void shouldPrintTheHobbit() {
-        assertEquals("The Hobbit", theHobbit.toString());
+        assertEquals("The Hobbit", theHobbit.getTitle());
+    }
+
+    @DisplayName("should print the lord of the rings book")
+    @Test
+    void shouldPrintTheLordOfTheRing() {
+        assertEquals("The Lord Of The Rings", theLordOfTheRings.getTitle());
     }
 }

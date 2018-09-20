@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /*
 A class for a library containing books
@@ -20,11 +21,10 @@ public class Library {
     }
 
     private Collection<Book> generateDefaultBookList() {
-        return new ArrayList<>(Arrays.asList(new Book("The Hobbit"),new Book("The Lord Of The Rings")));
+        return new ArrayList<>(Arrays.asList(new Book("The Hobbit", "Tolkien", 1954), new Book("The Lord Of The Rings", "Tolkien", 1954)));
     }
 
-    @Override
-    public String toString() {
-        return "" + bookList;
+    public Collection<String> getTitlesList() {
+        return this.bookList.stream().map(Book::getTitle).collect(Collectors.toList());
     }
 }

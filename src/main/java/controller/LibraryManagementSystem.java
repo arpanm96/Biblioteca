@@ -20,7 +20,7 @@ public class LibraryManagementSystem {
 
     public static void main(String[] args) {
         LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(new OutputDriver());
-        Library library = new Library(new ArrayList<>(Arrays.asList(new Book("The Hobbit"))));
+        Library library = new Library(new ArrayList<>(Arrays.asList(new Book("The Hobbit", "Tolkien", 1954))));
         libraryManagementSystem.displayInitial(library);
     }
 
