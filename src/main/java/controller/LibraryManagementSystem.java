@@ -35,12 +35,13 @@ public class LibraryManagementSystem {
 
     public void performOnMenuChoice() {
         int choice = 0;
-        while ((choice = getMainMenuChoice(inputDriver)) != MainMenu.values().length ) {
+        while ((choice = getMainMenuChoice(inputDriver)) != MainMenu.values().length) {
             if (isValidInput(choice)) {
                 displayMenuChoice(choice);
             } else {
                 outputDriver.printInvalidMenuChoice();
             }
+            outputDriver.printMainMenu();
         }
     }
 

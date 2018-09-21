@@ -17,13 +17,13 @@ public class Book {
 
     public Book(String title) {
         this.title = title;
-        this.author= "-";
+        this.author = "-";
         this.yearPublished = 0;
     }
 
     @Override
     public String toString() {
-        return String.format("%-25s %8s %8s", title, author, yearPublished);
+        return title + "," + author + "," + yearPublished;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(title.trim(), book.title.trim());
+        return title.trim().equalsIgnoreCase(book.title.trim());
     }
 
     @Override

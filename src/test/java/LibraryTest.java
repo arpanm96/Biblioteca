@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 class LibraryTest {
@@ -25,43 +24,114 @@ class LibraryTest {
     OutputDriver outputMockDriver;
     Library library;
     Collection<Book> bookList;
-    Collection<Book> expectedList;
+    Collection<Book> expectedListAfterCheckout;
+    Collection<Book> expectedListAfterReturn;
     LibraryManagementSystem libraryManagementSystem;
 
     @BeforeEach
     void initEach() {
         inputMockDriver = new InputDriver();
         outputMockDriver = mock(OutputDriver.class);
+
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
+
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
 
-        bookList = new ArrayList<>();
-        expectedList = new ArrayList<>(Arrays.asList(theLordOfTheRings));
-        bookList.addAll(Arrays.asList(theHobbit, theLordOfTheRings));
-
-        library = new Library(bookList);
         libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver);
     }
 
     @DisplayName("Should get the default library book list correctly")
     @Test
     void shouldGetDefaultLibraryBookList() {
-        assertEquals(new Library().getLibraryBookDetails(), new ArrayList<>(Arrays.asList("The Hobbit | Tolkien | 1937", "The Lord Of The Rings | Tolkien | 1954")));
+        assertEquals(new Library().getLibraryBookDetails(), new ArrayList<>(Arrays.asList("The Hobbit,Tolkien,1937", "The Lord Of The Rings,Tolkien,1954")));
     }
 
     @DisplayName("remove The Hobbit book")
     @Test
     void shouldRemoveTheHobbitBook() {
-        assertTrue(library.checkoutBook(theHobbit));
-        assertEquals(expectedList, bookList);
+        bookList = new ArrayList<>();
+        bookList.addAll(Arrays.asList(theHobbit, theLordOfTheRings));
+        library = new Library(bookList);
+        expectedListAfterCheckout = new ArrayList<>(Arrays.asList(theLordOfTheRings));
+
+        assertAll(() -> {
+            assertTrue(library.checkoutBook(theHobbit));
+            assertEquals(expectedListAfterCheckout, bookList);
+        });
     }
 
-    @DisplayName("add The Hobbit book")
+    @DisplayName("checkout The Lord Of The Rings book")
     @Test
-    void shouldAddTheHobbitBook() {
-        library.returnBook(new Book("The Hobbit"));
-        assertEquals(expectedList, bookList);
+    void shouldCheckoutTheLordOfTheRingsBook() {
+        bookList = new ArrayList<>();
+        bookList.addAll(Arrays.asList(theHobbit, theLordOfTheRings));
+        library = new Library(bookList);
+        expectedListAfterCheckout = new ArrayList<>(Arrays.asList(theHobbit));
+
+        assertAll(() -> {
+            assertTrue(library.checkoutBook(theLordOfTheRings));
+            assertEquals(expectedListAfterCheckout, bookList);
+        });
+    }
+
+    @DisplayName("should not checkout The Lord Of The Rings book")
+    @Test
+    void shouldNotCheckoutTheLordOfTheRingsBook() {
+        bookList = new ArrayList<>();
+        bookList.addAll(Arrays.asList(theHobbit));
+        library = new Library(bookList);
+        expectedListAfterCheckout = new ArrayList<>(Arrays.asList(theHobbit));
+
+        assertAll(() -> {
+            assertFalse(library.checkoutBook(theLordOfTheRings));
+            assertEquals(expectedListAfterCheckout, bookList);
+        });
+    }
+
+    @DisplayName("return The Hobbit book")
+    @Test
+    void shouldReturnTheHobbitBook() {
+        bookList = new ArrayList<>();
+        bookList.addAll(Arrays.asList(theHobbit, theLordOfTheRings));
+        library = new Library(bookList);
+        expectedListAfterReturn = new ArrayList<>(Arrays.asList(theLordOfTheRings, new Book("The Hobbit")));
+
+        assertAll(() -> {
+            assertTrue(library.checkoutBook(theHobbit));
+            assertTrue(library.returnBook(new Book("The Hobbit")));
+            assertEquals(expectedListAfterReturn, bookList);
+        });
+    }
+
+    @DisplayName("return The Lord Of The Ring book")
+    @Test
+    void shouldReturnTheLordOfTheRingsBook() {
+        bookList = new ArrayList<>();
+        bookList.addAll(Arrays.asList(theHobbit, theLordOfTheRings));
+        library = new Library(bookList);
+        expectedListAfterReturn = new ArrayList<>(Arrays.asList(theHobbit, new Book("The Lord Of The Rings")));
+
+        assertAll(() -> {
+            assertTrue(library.checkoutBook(theLordOfTheRings));
+            assertTrue(library.returnBook(new Book("The Lord Of The Rings")));
+            assertEquals(expectedListAfterReturn, bookList);
+        });
+    }
+
+    @DisplayName("should not return the already present The Lord Of The Ring book")
+    @Test
+    void shouldNotReturnTheLordOfTheRingsBook() {
+        bookList = new ArrayList<>();
+        bookList.addAll(Arrays.asList(theHobbit, theLordOfTheRings));
+        library = new Library(bookList);
+        expectedListAfterReturn = new ArrayList<>(Arrays.asList(theLordOfTheRings));
+
+        assertAll(() -> {
+            assertTrue(library.checkoutBook(theHobbit));
+            assertFalse(library.returnBook(new Book("The Lord Of The Rings")));
+            assertEquals(expectedListAfterReturn, bookList);
+        });
     }
 }

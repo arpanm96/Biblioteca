@@ -28,12 +28,28 @@ class LibraryManagementSystemTest {
         verify(outputDriver).printMainMenu();
     }
 
-    @DisplayName("should call the implicit functions of display Menu")
+    @DisplayName("should call the implicit functions of display Menu for input given as 4 i.e quit")
     @Test
-    void shouldCallImplicitFunctionsOfMenu() {
-        when(inputDriver.getMenuChoiceFromUser()).thenReturn(2).thenReturn(3).thenReturn(1);
+    void shouldCallImplicitFunctionsOfMenuFor1Input() {
+        when(inputDriver.getMenuChoiceFromUser()).thenReturn(4);
         libraryManagementSystem.performOnMenuChoice();
-        verify(inputDriver,times(3)).getMenuChoiceFromUser();
+        verify(inputDriver).getMenuChoiceFromUser();
+    }
+
+    @DisplayName("should call the implicit functions of display Menu for input given as invalid i.e 96")
+    @Test
+    void shouldCallImplicitFunctionsOfMenuForInvalidInput() {
+        when(inputDriver.getMenuChoiceFromUser()).thenReturn(96).thenReturn(4);
+        libraryManagementSystem.performOnMenuChoice();
+        verify(inputDriver,times(2)).getMenuChoiceFromUser();
         verify(outputDriver).printInvalidMenuChoice();
+    }
+
+    @DisplayName("should call the implicit functions of display Menu for listing menu i.e 1")
+    @Test
+    void shouldCallImplicitFunctionsOfMenuForListMenu() {
+        when(inputDriver.getMenuChoiceFromUser()).thenReturn(1).thenReturn(4);
+        libraryManagementSystem.performOnMenuChoice();
+        verify(inputDriver,times(2)).getMenuChoiceFromUser();
     }
 }

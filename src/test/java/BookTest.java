@@ -24,6 +24,6 @@ class BookTest {
     @DisplayName("should print the hobbit book")
     @Test
     void shouldPrintTheHobbit() {
-        assertEquals("The Hobbit                 Tolkien     1937",theHobbit.toString());
+        assertEquals("The Hobbit,Tolkien,1937",theHobbit.toString());
     }
 }

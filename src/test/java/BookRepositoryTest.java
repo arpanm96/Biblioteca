@@ -20,7 +20,7 @@ public class BookRepositoryTest {
     @DisplayName("should return default generated list correctly")
     @Test
     void shouldReturnTrueForDefaultGenerateList() {
-        assertEquals(bookRepository.generateDefaultBookList(), new ArrayList<>(Arrays.asList("The Hobbit                 Tolkien     1937", "The Lord Of The Rings      Tolkien     1954")));
+        assertEquals(bookRepository.generateDefaultBookList(), new ArrayList<>(Arrays.asList("The Hobbit,Tolkien,1937", "The Lord Of The Rings,Tolkien,1954")));
     }
 }
 

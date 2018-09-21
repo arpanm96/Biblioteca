@@ -9,4 +9,7 @@ public class Message {
     public final static String SUCCESSFUL_CHECKOUT = "Thank you! Enjoy the book";
     public final static String UNSUCCESSFUL_CHECKOUT = "That book is not available.";
     public final static String RETURN_BOOK = "Return Book";
+    public final static String SUCCESSFUL_RETURN = "Thank you for returning the book.";
+    public final static String UNSUCCESSFUL_RETURN = "That is not a valid book to return";
+    public final static String MENU_SEPERATOR = "=";
 }

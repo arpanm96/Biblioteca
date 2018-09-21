@@ -8,7 +8,7 @@ import view.OutputDriver;
 public enum MainMenu {
     LIST_BOOKS(Message.LIST_BOOKS) {
         @Override
-        public void act(Library library, InputDriver inputDriver,OutputDriver outputDriver) {
+        public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
             outputDriver.printBookList(library.getLibraryBookDetails());
         }
     },
@@ -16,10 +16,9 @@ public enum MainMenu {
         @Override
         public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
             Book bookToBeCheckedOut = new Book(inputDriver.getBookToBeCheckedOut());
-            if(library.checkoutBook(bookToBeCheckedOut)){
+            if (library.checkoutBook(bookToBeCheckedOut)) {
                 outputDriver.printBookCheckedOut();
-            }
-            else {
+            } else {
                 outputDriver.printBookNotCheckedOut();
             }
         }
@@ -27,8 +26,12 @@ public enum MainMenu {
     RETURN_BOOK(Message.RETURN_BOOK) {
         @Override
         public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-            Book bookToBeReturned =  new Book(inputDriver.getBookToBeReturned());
-            library.returnBook(bookToBeReturned);
+            Book bookToBeReturned = new Book(inputDriver.getBookToBeReturned());
+            if (library.returnBook(bookToBeReturned)) {
+                outputDriver.printBookReturned();
+            } else {
+                outputDriver.printBookNotReturned();
+            }
         }
     },
     QUIT(Message.QUIT) {

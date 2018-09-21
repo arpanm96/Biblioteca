@@ -66,5 +66,4 @@ class MainMenuTest {
         MainMenu.RETURN_BOOK.act(library, inputDriver, outputDriver);
         verify(library).returnBook(bookToBeReturned);
     }
-
 }

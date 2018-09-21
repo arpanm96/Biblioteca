@@ -16,31 +16,31 @@ import static org.mockito.Mockito.*;
 class OutputDriverTest {
 
     InputDriver inputMockDriver;
-    OutputDriver outputMockDriver;
+    OutputDriver outputDriver;
     Library library;
     Collection<Book> booksList;
     LibraryManagementSystem libraryManagementSystem;
     @BeforeEach
      void initEach() {
-        outputMockDriver = mock(OutputDriver.class);
+        outputDriver = new OutputDriver();
         Book booksMock1 = mock(Book.class);
         Book booksMock2 = mock(Book.class);
         booksList = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
-        Library library = new Library();
-        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver);
-    }
-
-    @Disabled
-    @DisplayName("Should expect call to print the message")
-    @Test
-    void shouldPrintWelcomeToBiblioteca() {
-        verify(outputMockDriver).printWelcomeMessage();
+        library = new Library();
+        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputDriver);
     }
 
     @Disabled
     @DisplayName("should display the list of books correctly")
     @Test
     void shouldDisplayBookListCorrectly() {
-        //outputMockDriver.printBookList();
+        outputDriver.printBookList(library.getLibraryBookDetails());
+    }
+
+    @Disabled
+    @DisplayName("should display the list of books correctly")
+    @Test
+    void shouldDisplayMenuCorrectly() {
+        outputDriver.printMainMenu();
     }
 }
