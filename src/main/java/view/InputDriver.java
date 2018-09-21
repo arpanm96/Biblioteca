@@ -12,4 +12,8 @@ public class InputDriver {
     public int getMenuChoiceFromUser() {
         return Integer.parseInt(scanner.nextLine());
     }
+
+    public String getBookToBeCheckedOut() {
+        return scanner.nextLine();
+    }
 }

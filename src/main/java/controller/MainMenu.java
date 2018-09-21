@@ -1,19 +1,32 @@
 package controller;
 
 import common.Message;
-import model.Library;
+import model.*;
+import view.InputDriver;
 import view.OutputDriver;
 
 public enum MainMenu {
-    QUIT("Quit") {
-        @Override
-        public void act(Library library, OutputDriver outputDriver) {
-        }
-    },
     LIST_BOOKS(Message.LIST_BOOKS) {
         @Override
-        public void act(Library library, OutputDriver outputDriver) {
+        public void act(Library library, InputDriver inputDriver,OutputDriver outputDriver) {
             outputDriver.printBookList(library.getLibraryBookDetails());
+        }
+    },
+    CHECKOUT(Message.CHECKOUT) {
+        @Override
+        public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
+            Book checkoutBook = new Book(inputDriver.getBookToBeCheckedOut());
+            if(library.removeBook(checkoutBook)){
+                outputDriver.printBookCheckedOut();
+            }
+            else {
+                outputDriver.printBookNotCheckedOut();
+            }
+        }
+    },
+    QUIT(Message.QUIT) {
+        @Override
+        public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
         }
     };
 
@@ -23,7 +36,7 @@ public enum MainMenu {
         this.message = message;
     }
 
-    public abstract void act(Library library, OutputDriver outputDriver);
+    public abstract void act(Library library, InputDriver inputDriver, OutputDriver outputDriver);
 
     @Override
     public String toString() {

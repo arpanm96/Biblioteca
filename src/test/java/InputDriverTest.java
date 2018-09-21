@@ -17,6 +17,15 @@ class InputDriverTest {
         assertEquals(2, inputDriver.getMenuChoiceFromUser());
     }
 
+    @DisplayName("expect The Hobbit in the input stream")
+    @Test
+    void testInputForBookToBeRemoved() {
+        setSystemIn("The Hobbit\n");
+
+        InputDriver inputDriver = new InputDriver();
+        assertEquals("The Hobbit", inputDriver.getBookToBeCheckedOut());
+    }
+
     private void setSystemIn(String string) {
         System.setIn(new ByteArrayInputStream(string.getBytes()));
     }

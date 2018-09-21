@@ -15,9 +15,15 @@ public class OutputDriver {
     }
 
     public void printBookList(Collection<String> bookDetails) {
+        printInitialRow();
+        Collection<String> bookDetailsFormattedColomns = new ViewFormatter().formatAccordingToColomns(bookDetails);
         for (String book : bookDetails) {
             System.out.println(book);
         }
+    }
+
+    private void printInitialRow() {
+        System.out.printf("Title\t\t\t\t\t\tAuthor\t\tYear Published\n");
     }
 
     public void printMainMenu() {
@@ -29,5 +35,13 @@ public class OutputDriver {
 
     public void printInvalidMenuChoice() {
         System.out.println(Message.INVALID_INPUT);
+    }
+
+    public void printBookCheckedOut() {
+        System.out.println(Message.SUCCESSFUL_CHECKOUT);
+    }
+
+    public void printBookNotCheckedOut() {
+        System.out.println(Message.UNSUCCESSFUL_CHECKOUT);
     }
 }

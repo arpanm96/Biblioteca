@@ -24,4 +24,14 @@ public class Library {
                 map(book -> (book.toString())).
                 collect(Collectors.toList());
     }
+
+    public boolean removeBook(Book bookToBeBeRemoved) {
+        for (Book book : bookList) {
+            if (book.equals(bookToBeBeRemoved)) {
+                bookList.remove(book);
+                return true;
+            }
+        }
+        return false;
+    }
 }

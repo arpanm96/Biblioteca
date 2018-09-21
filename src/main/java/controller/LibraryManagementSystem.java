@@ -25,7 +25,7 @@ public class LibraryManagementSystem {
     }
 
     private void displayMenuChoice(int choice) {
-        MainMenu.values()[choice - 1].act(library, outputDriver);
+        MainMenu.values()[choice - 1].act(library, inputDriver, outputDriver);
     }
 
     public void start() {
@@ -35,7 +35,7 @@ public class LibraryManagementSystem {
 
     public void performOnMenuChoice() {
         int choice = 0;
-        while ((choice = getMainMenuChoice(inputDriver)) != INDEX_OFFSET) {
+        while ((choice = getMainMenuChoice(inputDriver)) != MainMenu.values().length ) {
             if (isValidInput(choice)) {
                 displayMenuChoice(choice);
             } else {
@@ -43,6 +43,7 @@ public class LibraryManagementSystem {
             }
         }
     }
+
     private int getMainMenuChoice(InputDriver inputDriver) {
         return inputDriver.getMenuChoiceFromUser();
     }
