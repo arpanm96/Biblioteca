@@ -25,13 +25,17 @@ public class Library {
                 collect(Collectors.toList());
     }
 
-    public boolean removeBook(Book bookToBeBeRemoved) {
+    public boolean checkoutBook(Book bookToBeCheckedOut) {
         for (Book book : bookList) {
-            if (book.equals(bookToBeBeRemoved)) {
+            if (book.equals(bookToBeCheckedOut)) {
                 bookList.remove(book);
                 return true;
             }
         }
         return false;
+    }
+
+    public void returnBook(Book returnBook) {
+        bookList.add(returnBook);
     }
 }

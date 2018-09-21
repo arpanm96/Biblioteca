@@ -15,13 +15,20 @@ public enum MainMenu {
     CHECKOUT(Message.CHECKOUT) {
         @Override
         public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-            Book checkoutBook = new Book(inputDriver.getBookToBeCheckedOut());
-            if(library.removeBook(checkoutBook)){
+            Book bookToBeCheckedOut = new Book(inputDriver.getBookToBeCheckedOut());
+            if(library.checkoutBook(bookToBeCheckedOut)){
                 outputDriver.printBookCheckedOut();
             }
             else {
                 outputDriver.printBookNotCheckedOut();
             }
+        }
+    },
+    RETURN_BOOK(Message.RETURN_BOOK) {
+        @Override
+        public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
+            Book bookToBeReturned =  new Book(inputDriver.getBookToBeReturned());
+            library.returnBook(bookToBeReturned);
         }
     },
     QUIT(Message.QUIT) {

@@ -8,4 +8,5 @@ public class Message {
     public final static String QUIT = "Quit";
     public final static String SUCCESSFUL_CHECKOUT = "Thank you! Enjoy the book";
     public final static String UNSUCCESSFUL_CHECKOUT = "That book is not available.";
+    public final static String RETURN_BOOK = "Return Book";
 }

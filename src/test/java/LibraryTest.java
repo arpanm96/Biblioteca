@@ -48,13 +48,20 @@ class LibraryTest {
     @DisplayName("Should get the default library book list correctly")
     @Test
     void shouldGetDefaultLibraryBookList() {
-        assertEquals(new Library().getLibraryBookDetails(), new ArrayList<>(Arrays.asList("The Hobbit | Tolkien | 1954", "The Lord Of The Rings | Tolkien | 1954")));
+        assertEquals(new Library().getLibraryBookDetails(), new ArrayList<>(Arrays.asList("The Hobbit | Tolkien | 1937", "The Lord Of The Rings | Tolkien | 1954")));
     }
 
     @DisplayName("remove The Hobbit book")
     @Test
     void shouldRemoveTheHobbitBook() {
-        assertTrue(library.removeBook(theHobbit));
+        assertTrue(library.checkoutBook(theHobbit));
+        assertEquals(expectedList, bookList);
+    }
+
+    @DisplayName("add The Hobbit book")
+    @Test
+    void shouldAddTheHobbitBook() {
+        library.returnBook(new Book("The Hobbit"));
         assertEquals(expectedList, bookList);
     }
 }

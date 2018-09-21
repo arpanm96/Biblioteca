@@ -16,4 +16,8 @@ public class InputDriver {
     public String getBookToBeCheckedOut() {
         return scanner.nextLine();
     }
+
+    public String getBookToBeReturned() {
+        return scanner.nextLine();
+    }
 }

@@ -17,6 +17,8 @@ public class Book {
 
     public Book(String title) {
         this.title = title;
+        this.author= "-";
+        this.yearPublished = 0;
     }
 
     @Override
