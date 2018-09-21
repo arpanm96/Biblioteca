@@ -4,6 +4,7 @@ import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.InputDriver;
 import view.OutputDriver;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ class LibraryTest {
     Book theHobbit;
     Book theLordOfTheRings;
 
+    InputDriver inputMockDriver;
     OutputDriver outputMockDriver;
     Library library;
     Collection<Book> bookList;
@@ -27,6 +29,7 @@ class LibraryTest {
 
     @BeforeEach
     void initEach() {
+        inputMockDriver = new InputDriver();
         outputMockDriver = mock(OutputDriver.class);
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
@@ -38,7 +41,7 @@ class LibraryTest {
         bookList.addAll(Arrays.asList(theHobbit, theLordOfTheRings));
 
         library = new Library(bookList);
-        libraryManagementSystem = new LibraryManagementSystem();
+        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver);
     }
 
     @DisplayName("Should get the default library book list correctly")

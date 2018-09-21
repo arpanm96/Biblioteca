@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import model.Book;
 import model.Library;
+import view.InputDriver;
 import view.OutputDriver;
 
 import java.util.*;
@@ -14,6 +15,7 @@ import static org.mockito.Mockito.*;
 
 class OutputDriverTest {
 
+    InputDriver inputMockDriver;
     OutputDriver outputMockDriver;
     Library library;
     Collection<Book> booksList;
@@ -25,7 +27,7 @@ class OutputDriverTest {
         Book booksMock2 = mock(Book.class);
         booksList = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
         Library library = new Library();
-        libraryManagementSystem = new LibraryManagementSystem();
+        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver);
     }
 
     @Disabled

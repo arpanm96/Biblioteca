@@ -4,18 +4,16 @@ import common.Message;
 import model.Library;
 import view.OutputDriver;
 
-import java.util.ArrayList;
-
 public enum MainMenu {
     QUIT("Quit") {
         @Override
-        public void act(Library library) {
+        public void act(Library library, OutputDriver outputDriver) {
         }
     },
     LIST_BOOKS(Message.LIST_BOOKS) {
         @Override
-        public void act(Library library) {
-            new OutputDriver().printBookList(new ArrayList<>(library.getLibraryBookDetails()));
+        public void act(Library library, OutputDriver outputDriver) {
+            outputDriver.printBookList(library.getLibraryBookDetails());
         }
     };
 
@@ -25,7 +23,7 @@ public enum MainMenu {
         this.message = message;
     }
 
-    public abstract void act(Library library);
+    public abstract void act(Library library, OutputDriver outputDriver);
 
     @Override
     public String toString() {

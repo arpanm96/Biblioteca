@@ -22,7 +22,7 @@ class InputDriverTest {
     }
 
     @AfterEach
-    public void setup() {
+    void setup() {
         System.setIn(System.in);
     }
 }
