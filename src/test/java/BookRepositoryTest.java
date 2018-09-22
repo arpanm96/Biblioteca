@@ -28,7 +28,7 @@ class BookRepositoryTest {
     @Test
     void shouldReturnTrueForDefaultGenerateList() {
         expectedList = new ArrayList<>(Arrays.asList(theHobbit, theLordOfTheRings));
-        assertEquals(bookRepository.generateDefaultBookList(), expectedList);
+        assertEquals(bookRepository.generateDefaultItemList(), expectedList);
     }
 }
 

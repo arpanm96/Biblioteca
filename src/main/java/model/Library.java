@@ -9,43 +9,44 @@ A class for a library containing books
 */
 
 public class Library {
-    private Collection<Book> bookList;
-    private Collection<Book> booksToBeReturnedList;
+    private Collection<Item> itemList;
+    private Collection<Item> itemToBeReturnedList;
 
-    public Library(Collection<Book> bookList) {
-        booksToBeReturnedList = new ArrayList<>();
-        this.bookList = bookList;
+    public Library(Collection<Item> itemList) {
+        itemToBeReturnedList = new ArrayList<>();
+        this.itemList = itemList;
     }
 
-    public Collection<String> getLibraryBookDetails() {
-        return this.bookList.stream().
+    public Collection<String> getLibraryItemDetails(ItemType itemType) {
+        return this.itemList.stream().
+                filter((item -> item.getItemType().equals(ItemType.BOOK))).
                 map(book -> (book.toString())).
                 collect(Collectors.toList());
     }
 
-    public boolean checkoutBook(Book bookToBeCheckedOut) {
-        for (Book book : bookList) {
+    public boolean checkoutItem(Item bookToBeCheckedOut) {
+        for (Item book : itemList) {
             if (book.equals(bookToBeCheckedOut)) {
-                booksToBeReturnedList.add(book);
-                bookList.remove(book);
+                itemToBeReturnedList.add(book);
+                itemList.remove(book);
                 return true;
             }
         }
         return false;
     }
 
-    public boolean returnBook(Book returnBook) {
-        if (booksToBeReturnedList != null && this.containsBook(returnBook)) {
-            bookList.add(returnBook);
-            booksToBeReturnedList.remove(returnBook);
+    public boolean returnItem(Item returnItem) {
+        if (itemToBeReturnedList != null && this.containsItem(returnItem)) {
+            itemList.add(returnItem);
+            itemToBeReturnedList.remove(returnItem);
             return true;
         }
         return false;
     }
 
-    private boolean containsBook(Book returnBook) {
-        for (Book book : booksToBeReturnedList) {
-            if (book.equals(returnBook)) {
+    private boolean containsItem(Item returnItem) {
+        for (Item book : itemToBeReturnedList) {
+            if (book.equals(returnItem)) {
                 return true;
             }
         }

@@ -1,6 +1,8 @@
+
 import controller.MainMenu;
 import model.Book;
 import model.BookRepository;
+import model.ItemType;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,10 +27,10 @@ public class ReturnBookActionTest {
 
     @BeforeEach
     void initEach() {
-        library = new Library(new BookRepository().generateDefaultBookList());
+        library = new Library(new BookRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        bookDetails = library.getLibraryBookDetails();
+        bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
     }

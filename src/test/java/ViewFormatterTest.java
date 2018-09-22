@@ -1,10 +1,10 @@
 import model.Book;
 import model.BookRepository;
+import model.ItemType;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import view.InputDriver;
 import view.OutputDriver;
 import view.ViewFormatter;
 
@@ -24,9 +24,9 @@ public class ViewFormatterTest {
 
     @BeforeEach
     void initEach() {
-        library = new Library( new BookRepository().generateDefaultBookList());
+        library = new Library( new BookRepository().generateDefaultItemList());
         outputDriver = new OutputDriver();
-        bookDetails = library.getLibraryBookDetails();
+        bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
     }
@@ -34,7 +34,7 @@ public class ViewFormatterTest {
     @DisplayName("should return correct formatted string for book The Hobbit")
     @Test
     void shouldReturnFormattedTheHobbit() {
-        bookDetails = library.getLibraryBookDetails();
+        bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         ViewFormatter viewFormatter = new ViewFormatter();
         String firstRow = "Title,Author,Year Published";
         outputDriver.printBookList(viewFormatter.formatAccordingToColomns(new ArrayList<>(Arrays.asList(firstRow))));

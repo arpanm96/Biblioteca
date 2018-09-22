@@ -1,5 +1,7 @@
+
 import controller.MainMenu;
 import model.Book;
+import model.ItemType;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +17,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class ListMenuActionTest {
+public class ListBookActionTest {
 
     Book booksMock1;
     Book booksMock2;
@@ -36,7 +38,7 @@ public class ListMenuActionTest {
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
         bookCollection = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
-        bookDetails = library.getLibraryBookDetails();
+        bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
     }
@@ -46,7 +48,6 @@ public class ListMenuActionTest {
     void actOnMenuList() {
         MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver);
         verify(outputDriver).printBookList(bookDetails);
-        verify(library,times(2)).getLibraryBookDetails();
+        verify(library,times(2)).getLibraryItemDetails(ItemType.BOOK);
     }
-
 }

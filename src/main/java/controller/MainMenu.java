@@ -1,12 +1,17 @@
 package controller;
 
+import action.CheckOutBookAction;
+import action.ListBookAction;
+import action.ReturnBookAction;
 import common.Message;
+import action.QuitAction;
 import model.*;
 import view.InputDriver;
 import view.OutputDriver;
 
 public enum MainMenu {
-    LIST_BOOKS(Message.LIST_BOOKS, new ListMenuAction()),
+    LIST_BOOKS(Message.LIST_BOOKS, new ListBookAction()),
+    LIST_MOVIES(Message.LIST_MOVIES, new ListMovieAction()),
     CHECKOUT(Message.CHECKOUT, new CheckOutBookAction()),
     RETURN_BOOK(Message.RETURN_BOOK, new ReturnBookAction()),
     QUIT(Message.QUIT, new QuitAction()) {

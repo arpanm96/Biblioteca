@@ -3,11 +3,10 @@ package model;
 
 import java.util.Objects;
 
-public class Book {
+public class Book implements Item{
     private String title;
     private String author;
     private int yearPublished;
-
 
     public Book(String title, String author, int yearPublished) {
         this.title = title;
@@ -19,6 +18,11 @@ public class Book {
         this.title = title;
         this.author = "-";
         this.yearPublished = 0;
+    }
+
+    @Override
+    public ItemType getItemType() {
+        return ItemType.BOOK;
     }
 
     @Override

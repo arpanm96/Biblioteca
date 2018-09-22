@@ -12,7 +12,7 @@ public class Biblioteca {
     public static void main(String[] args) {
         InputDriver inputDriver = new InputDriver();
         OutputDriver outputDriver = new OutputDriver();
-        Library library = new Library(new BookRepository().generateDefaultBookList());
+        Library library = new Library(new BookRepository().generateDefaultItemList());
         LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library);
         libraryManagementSystem.start();
         libraryManagementSystem.performOnMenuChoice();

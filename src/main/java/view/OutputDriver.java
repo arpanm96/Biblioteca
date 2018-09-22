@@ -16,12 +16,12 @@ public class OutputDriver {
         System.out.println(Message.WELCOME);
     }
 
-    public void printBookList(Collection<String> bookDetails) {
-        ArrayList<String> books = new ArrayList<>(bookDetails);
-        books.add(0, "Title,Author,Year Published");
-        Collection<String> bookDetailsFormattedColomns = new ViewFormatter().formatAccordingToColomns(books);
-        for (String book : bookDetailsFormattedColomns) {
-            System.out.println(book);
+    public void printBookList(Collection<String> itemDetails) {
+        ArrayList<String> items = new ArrayList<>(itemDetails);
+        items.add(0, "Title,Author,Year Published");
+        Collection<String> bookDetailsFormattedColomns = new ViewFormatter().formatAccordingToColomns(items);
+        for (String item : bookDetailsFormattedColomns) {
+            System.out.println(item);
         }
     }
 
@@ -57,5 +57,9 @@ public class OutputDriver {
 
     public void printBookNotReturned() {
         System.out.println(Message.UNSUCCESSFUL_RETURN);
+    }
+
+    public void print(String message) {
+        System.out.println(message);
     }
 }

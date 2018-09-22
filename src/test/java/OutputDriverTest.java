@@ -1,5 +1,6 @@
 import controller.LibraryManagementSystem;
 import model.BookRepository;
+import model.ItemType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +28,7 @@ class OutputDriverTest {
         Book booksMock1 = mock(Book.class);
         Book booksMock2 = mock(Book.class);
         booksList = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
-        library = new Library( new BookRepository().generateDefaultBookList());
+        library = new Library( new BookRepository().generateDefaultItemList());
         libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputDriver, library);
     }
 
@@ -35,7 +36,7 @@ class OutputDriverTest {
     @DisplayName("should display the list of books correctly")
     @Test
     void shouldDisplayBookListCorrectly() {
-        outputDriver.printBookList(library.getLibraryBookDetails());
+        outputDriver.printBookList(library.getLibraryItemDetails(ItemType.BOOK));
     }
 
     @Disabled
@@ -45,3 +46,4 @@ class OutputDriverTest {
         outputDriver.printMainMenu();
     }
 }
+
