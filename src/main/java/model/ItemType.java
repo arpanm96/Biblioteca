@@ -1,12 +1,12 @@
 package model;
 
 public enum ItemType {
-    BOOK{
+    BOOK {
         @Override
         public String getItemHeaders() {
             return "Title,Author,Year Published";
         }
-    }, MOVIE{
+    }, MOVIE {
         @Override
         public String getItemHeaders() {
             return "Name,Year,Director,Movie Rating";

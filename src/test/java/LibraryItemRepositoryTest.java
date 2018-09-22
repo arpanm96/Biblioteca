@@ -16,6 +16,7 @@ class LibraryItemRepositoryTest {
     Book theHobbit;
     Book theLordOfTheRings;
     Movie shawshankRedemption;
+    Movie se7en;
     LibraryItemRepository libraryItemRepository;
     Collection<Item> expectedList;
 
@@ -24,13 +25,14 @@ class LibraryItemRepositoryTest {
         libraryItemRepository = new LibraryItemRepository();
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
-        shawshankRedemption = new Movie("Shawshank Redemption","Frank Darabont",10,1994);
+        shawshankRedemption = new Movie("Shawshank Redemption", "Frank Darabont", 10, 1994);
+        se7en = new Movie("Se7en", "David Fincher", 9, 1995);
     }
 
     @DisplayName("should return default generated list correctly")
     @Test
     void shouldReturnTrueForDefaultGenerateList() {
-        expectedList = new ArrayList<Item>(Arrays.asList(theHobbit, theLordOfTheRings, shawshankRedemption));
+        expectedList = new ArrayList<Item>(Arrays.asList(theHobbit, theLordOfTheRings, shawshankRedemption, se7en));
         assertEquals(expectedList, libraryItemRepository.generateDefaultItemList());
     }
 }

@@ -46,7 +46,7 @@ public class ReturnBookActionTest {
 
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
         MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver);
-        verify(outputDriver).printBookNotReturned();
+        verify(outputDriver).print(Message.UNSUCCESSFUL_BOOK_RETURN);
     }
 
     @DisplayName("should return back a checked out book")
@@ -60,6 +60,6 @@ public class ReturnBookActionTest {
 
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
         MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver);
-        verify(outputDriver).printBookReturned();
+        verify(outputDriver).print(Message.SUCCESSFUL_BOOK_RETURN);
     }
 }

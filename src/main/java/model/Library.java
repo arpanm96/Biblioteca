@@ -45,8 +45,8 @@ public class Library {
     }
 
     private boolean containsItem(Item returnItem) {
-        for (Item book : itemToBeReturnedList) {
-            if (book.equals(returnItem)) {
+        for (Item item : itemToBeReturnedList) {
+            if (item.equals(returnItem)) {
                 return true;
             }
         }

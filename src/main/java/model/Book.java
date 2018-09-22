@@ -3,7 +3,7 @@ package model;
 
 import java.util.Objects;
 
-public class Book implements Item{
+public class Book implements Item {
     private String title;
     private String author;
     private int yearPublished;

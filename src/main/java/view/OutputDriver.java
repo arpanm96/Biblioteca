@@ -54,22 +54,6 @@ public class OutputDriver {
         System.out.println(Message.INVALID_INPUT);
     }
 
-    public void printBookCheckedOut() {
-        System.out.println(Message.SUCCESSFUL_BOOK_CHECKOUT);
-    }
-
-    public void printBookNotCheckedOut() {
-        System.out.println(Message.UNSUCCESSFUL_BOOK_CHECKOUT);
-    }
-
-    public void printBookReturned() {
-        System.out.println(Message.SUCCESSFUL_BOOK_RETURN);
-    }
-
-    public void printBookNotReturned() {
-        System.out.println(Message.UNSUCCESSFUL_BOOK_RETURN);
-    }
-
     public void print(String message) {
         System.out.println(message);
     }
