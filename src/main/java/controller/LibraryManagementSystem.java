@@ -1,5 +1,6 @@
 package controller;
 
+import model.BookRepository;
 import model.Library;
 import view.InputDriver;
 import view.OutputDriver;
@@ -14,10 +15,10 @@ public class LibraryManagementSystem {
     private OutputDriver outputDriver;
     private Library library;
 
-    public LibraryManagementSystem(InputDriver inputDriver, OutputDriver outputDriver) {
+    public LibraryManagementSystem(InputDriver inputDriver, OutputDriver outputDriver, Library library) {
         this.inputDriver = inputDriver;
         this.outputDriver = outputDriver;
-        library = new Library();
+        this.library = library;
     }
 
     private boolean isValidInput(int choice) {

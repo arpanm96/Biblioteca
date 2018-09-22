@@ -1,5 +1,6 @@
 import controller.LibraryManagementSystem;
 import model.Book;
+import model.BookRepository;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -39,13 +40,14 @@ class LibraryTest {
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
 
-        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver);
+        library =  new Library( new BookRepository().generateDefaultBookList());
+        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver, library);
     }
 
     @DisplayName("Should get the default library book list correctly")
     @Test
     void shouldGetDefaultLibraryBookList() {
-        assertEquals(new Library().getLibraryBookDetails(), new ArrayList<>(Arrays.asList("The Hobbit,Tolkien,1937", "The Lord Of The Rings,Tolkien,1954")));
+        assertEquals(library.getLibraryBookDetails(), new ArrayList<>(Arrays.asList("The Hobbit,Tolkien,1937", "The Lord Of The Rings,Tolkien,1954")));
     }
 
     @DisplayName("remove The Hobbit book")

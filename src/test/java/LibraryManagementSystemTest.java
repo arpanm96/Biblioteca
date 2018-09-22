@@ -1,4 +1,6 @@
 import controller.LibraryManagementSystem;
+import model.BookRepository;
+import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,13 +13,15 @@ class LibraryManagementSystemTest {
 
     OutputDriver outputDriver;
     InputDriver inputDriver;
+    Library library;
     LibraryManagementSystem libraryManagementSystem;
 
     @BeforeEach
     void initEach(){
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver);
+        library = new Library( new BookRepository().generateDefaultBookList());
+        libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library);
     }
 
     @DisplayName("should call the implicit functions of start")
