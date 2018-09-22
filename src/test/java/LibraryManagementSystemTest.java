@@ -35,7 +35,7 @@ class LibraryManagementSystemTest {
     @DisplayName("should call the implicit functions of display Menu for input given as 4 i.e quit")
     @Test
     void shouldCallImplicitFunctionsOfMenuFor1Input() {
-        when(inputDriver.getMenuChoiceFromUser()).thenReturn(1);
+        when(inputDriver.getMenuChoiceFromUser()).thenReturn(4);
         libraryManagementSystem.performOnMenuChoice();
         verify(inputDriver).getMenuChoiceFromUser();
     }

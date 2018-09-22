@@ -1,10 +1,8 @@
-import controller.Action;
 import controller.MainMenu;
 import model.Book;
 import model.BookRepository;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import view.InputDriver;
@@ -14,8 +12,9 @@ import java.util.Collection;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-class ActionTest {
+class CheckoutBookActionTest {
 
     Book theHobbit;
     Book theLordOfTheRings;
@@ -24,10 +23,9 @@ class ActionTest {
     Library library;
     InputDriver inputDriver;
     OutputDriver outputDriver;
-    Action action;
+
     @BeforeEach
     void initEach() {
-        action = mock(Action.class);
         library = new Library(new BookRepository().generateDefaultBookList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
@@ -36,11 +34,21 @@ class ActionTest {
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
     }
 
-    @Disabled
-    @DisplayName("check if act is being called for menu list")
+    @DisplayName("verify book is not checked out")
     @Test
-    void checkActBeingCalledForListMenu() {
-        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver);
-        verify(action).act(library, inputDriver, outputDriver);
+    void shouldNotCheckoutBook() {
+        when(inputDriver.getBookToBeCheckedOut()).thenReturn("A Random Book");
+        MainMenu.CHECKOUT.perform(library, inputDriver, outputDriver);
+        verify(inputDriver).getBookToBeCheckedOut();
+        verify(outputDriver).printBookNotCheckedOut();
+    }
+
+    @DisplayName("verify book is checked out")
+    @Test
+    void shouldCheckoutBook() {
+        when(inputDriver.getBookToBeCheckedOut()).thenReturn("The Hobbit");
+        MainMenu.CHECKOUT.perform(library, inputDriver, outputDriver);
+        verify(inputDriver).getBookToBeCheckedOut();
+        verify(outputDriver).printBookCheckedOut();
     }
 }

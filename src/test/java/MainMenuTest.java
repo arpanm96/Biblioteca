@@ -40,22 +40,7 @@ class MainMenuTest {
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
     }/*
 
-    @DisplayName("verify perform on checkout")
-    @Test
-    void actOnCheckout() {
-        when(inputDriver.getBookToBeCheckedOut()).thenReturn("The Hobbit");
-        Book checkoutBook = new Book("The Hobbit");
-        MainMenu.CHECKOUT.perform(library, inputDriver, outputDriver);
-        verify(inputDriver).getBookToBeCheckedOut();
-        verify(library).checkoutBook(checkoutBook);
-    }
 
-    @DisplayName("verify perform on return book")
-    @Test
-    void actOnReturnBook() {
-        when(inputDriver.getBookToBeReturned()).thenReturn("The Hobbit");
-        Book bookToBeReturned = new Book("The Hobbit");
-        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver);
-        verify(library).returnBook(bookToBeReturned);
-    }*/
+
+*/
 }

@@ -6,36 +6,11 @@ import view.InputDriver;
 import view.OutputDriver;
 
 public enum MainMenu {
-    LIST_BOOKS(Message.LIST_BOOKS, new ListMenuAction());
-/*    CHECKOUT(Message.CHECKOUT) {
-        @Override
-        public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-            Book bookToBeCheckedOut = new Book(inputDriver.getBookToBeCheckedOut());
-            if(library.checkoutBook(bookToBeCheckedOut)){
-                outputDriver.printBookCheckedOut();
-            }
-            else {
-                outputDriver.printBookNotCheckedOut();
-            }
-        }
-    },
-    RETURN_BOOK(Message.RETURN_BOOK) {
-        @Override
-        public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-            Book bookToBeReturned =  new Book(inputDriver.getBookToBeReturned());
-            if(library.returnBook(bookToBeReturned)){
-                outputDriver.printBookReturned();
-            }
-            else {
-                outputDriver.printBookNotReturned();
-            }
-        }
-    },
-    QUIT(Message.QUIT) {
-        @Override
-        public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-        }
-    };*/
+    LIST_BOOKS(Message.LIST_BOOKS, new ListMenuAction()),
+    CHECKOUT(Message.CHECKOUT, new CheckOutBookAction()),
+    RETURN_BOOK(Message.RETURN_BOOK, new ReturnBookAction()),
+    QUIT(Message.QUIT, new QuitAction()) {
+    };
 
     private String message;
     public Action action;
