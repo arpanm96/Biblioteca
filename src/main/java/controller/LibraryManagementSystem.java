@@ -1,6 +1,5 @@
 package controller;
 
-import model.BookRepository;
 import model.Library;
 import view.InputDriver;
 import view.OutputDriver;
@@ -26,7 +25,7 @@ public class LibraryManagementSystem {
     }
 
     private void displayMenuChoice(int choice) {
-        MainMenu.values()[choice - 1].act(library, inputDriver, outputDriver);
+        MainMenu.values()[choice - 1].perform(library, inputDriver, outputDriver);
     }
 
     public void start() {

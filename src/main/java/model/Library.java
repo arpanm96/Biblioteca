@@ -17,11 +17,6 @@ public class Library {
         this.bookList = bookList;
     }
 
-/*    public Library() {
-        bookList = new BookRepository().generateDefaultBookList();
-        this.booksToBeReturnedList = new ArrayList<>();
-    }*/
-
     public Collection<String> getLibraryBookDetails() {
         return this.bookList.stream().
                 map(book -> (book.toString())).

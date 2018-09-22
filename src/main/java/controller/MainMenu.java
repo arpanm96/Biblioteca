@@ -6,47 +6,48 @@ import view.InputDriver;
 import view.OutputDriver;
 
 public enum MainMenu {
-    LIST_BOOKS(Message.LIST_BOOKS) {
+    LIST_BOOKS(Message.LIST_BOOKS, new ListMenuAction());
+/*    CHECKOUT(Message.CHECKOUT) {
         @Override
-        public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-            outputDriver.printBookList(library.getLibraryBookDetails());
-        }
-    },
-    CHECKOUT(Message.CHECKOUT) {
-        @Override
-        public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
+        public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
             Book bookToBeCheckedOut = new Book(inputDriver.getBookToBeCheckedOut());
-            if (library.checkoutBook(bookToBeCheckedOut)) {
+            if(library.checkoutBook(bookToBeCheckedOut)){
                 outputDriver.printBookCheckedOut();
-            } else {
+            }
+            else {
                 outputDriver.printBookNotCheckedOut();
             }
         }
     },
     RETURN_BOOK(Message.RETURN_BOOK) {
         @Override
-        public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-            Book bookToBeReturned = new Book(inputDriver.getBookToBeReturned());
-            if (library.returnBook(bookToBeReturned)) {
+        public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
+            Book bookToBeReturned =  new Book(inputDriver.getBookToBeReturned());
+            if(library.returnBook(bookToBeReturned)){
                 outputDriver.printBookReturned();
-            } else {
+            }
+            else {
                 outputDriver.printBookNotReturned();
             }
         }
     },
     QUIT(Message.QUIT) {
         @Override
-        public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
+        public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
         }
-    };
+    };*/
 
     private String message;
+    public Action action;
 
-    MainMenu(String message) {
+    MainMenu(String message, Action action ) {
         this.message = message;
+        this.action = action;
     }
 
-    public abstract void act(Library library, InputDriver inputDriver, OutputDriver outputDriver);
+    public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
+        this.action.act(library,inputDriver,outputDriver);
+    }
 
     @Override
     public String toString() {

@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-class MainMenuTest {
+public class ListMenuActionTest {
 
     Book booksMock1;
     Book booksMock2;
@@ -38,24 +39,14 @@ class MainMenuTest {
         bookDetails = library.getLibraryBookDetails();
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
-    }/*
-
-    @DisplayName("verify perform on checkout")
-    @Test
-    void actOnCheckout() {
-        when(inputDriver.getBookToBeCheckedOut()).thenReturn("The Hobbit");
-        Book checkoutBook = new Book("The Hobbit");
-        MainMenu.CHECKOUT.perform(library, inputDriver, outputDriver);
-        verify(inputDriver).getBookToBeCheckedOut();
-        verify(library).checkoutBook(checkoutBook);
     }
 
-    @DisplayName("verify perform on return book")
+    @DisplayName("verify perform on menu list")
     @Test
-    void actOnReturnBook() {
-        when(inputDriver.getBookToBeReturned()).thenReturn("The Hobbit");
-        Book bookToBeReturned = new Book("The Hobbit");
-        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver);
-        verify(library).returnBook(bookToBeReturned);
-    }*/
+    void actOnMenuList() {
+        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver);
+        verify(outputDriver).printBookList(bookDetails);
+        verify(library,times(2)).getLibraryBookDetails();
+    }
+
 }
