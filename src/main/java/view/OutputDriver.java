@@ -37,7 +37,7 @@ public class OutputDriver {
     }
 
     private void printMenuSeparator() {
-        Stream.generate(() -> Message.MENU_SEPERATOR).limit(80).forEach(System.out::print);
+        Stream.generate(() -> Message.MENU_SEPERATOR).limit(120).forEach(System.out::print);
         System.out.println();
     }
 
@@ -55,19 +55,19 @@ public class OutputDriver {
     }
 
     public void printBookCheckedOut() {
-        System.out.println(Message.SUCCESSFUL_CHECKOUT);
+        System.out.println(Message.SUCCESSFUL_BOOK_CHECKOUT);
     }
 
     public void printBookNotCheckedOut() {
-        System.out.println(Message.UNSUCCESSFUL_CHECKOUT);
+        System.out.println(Message.UNSUCCESSFUL_BOOK_CHECKOUT);
     }
 
     public void printBookReturned() {
-        System.out.println(Message.SUCCESSFUL_RETURN);
+        System.out.println(Message.SUCCESSFUL_BOOK_RETURN);
     }
 
     public void printBookNotReturned() {
-        System.out.println(Message.UNSUCCESSFUL_RETURN);
+        System.out.println(Message.UNSUCCESSFUL_BOOK_RETURN);
     }
 
     public void print(String message) {

@@ -12,12 +12,14 @@ public class InputDriver {
     public int getMenuChoiceFromUser() {
         return Integer.parseInt(scanner.nextLine());
     }
+/*
 
-    public String getBookToBeCheckedOut() {
+    public String getUserInput() {
         return scanner.nextLine();
     }
+*/
 
-    public String getBookToBeReturned() {
+    public String getUserInput() {
         return scanner.nextLine();
     }
 }

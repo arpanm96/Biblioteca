@@ -24,11 +24,11 @@ public class Library {
                 collect(Collectors.toList());
     }
 
-    public boolean checkoutItem(Item bookToBeCheckedOut) {
-        for (Item book : itemList) {
-            if (book.equals(bookToBeCheckedOut)) {
-                itemToBeReturnedList.add(book);
-                itemList.remove(book);
+    public boolean checkoutItem(Item itemToBeCheckedOut) {
+        for (Item item : itemList) {
+            if (item.equals(itemToBeCheckedOut)) {
+                itemToBeReturnedList.add(item);
+                itemList.remove(item);
                 return true;
             }
         }

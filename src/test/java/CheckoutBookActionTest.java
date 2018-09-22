@@ -1,3 +1,4 @@
+import common.Message;
 import controller.MainMenu;
 import model.Book;
 import model.LibraryItemRepository;
@@ -38,18 +39,18 @@ class CheckoutBookActionTest {
     @DisplayName("verify book is not checked out")
     @Test
     void shouldNotCheckoutBook() {
-        when(inputDriver.getBookToBeCheckedOut()).thenReturn("A Random Book");
-        MainMenu.CHECKOUT.perform(library, inputDriver, outputDriver);
-        verify(inputDriver).getBookToBeCheckedOut();
-        verify(outputDriver).printBookNotCheckedOut();
+        when(inputDriver.getUserInput()).thenReturn("A Random Book");
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver);
+        verify(inputDriver).getUserInput();
+        verify(outputDriver).print(Message.UNSUCCESSFUL_BOOK_CHECKOUT);
     }
 
     @DisplayName("verify book is checked out")
     @Test
     void shouldCheckoutBook() {
-        when(inputDriver.getBookToBeCheckedOut()).thenReturn("The Hobbit");
-        MainMenu.CHECKOUT.perform(library, inputDriver, outputDriver);
-        verify(inputDriver).getBookToBeCheckedOut();
-        verify(outputDriver).printBookCheckedOut();
+        when(inputDriver.getUserInput()).thenReturn("The Hobbit");
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver);
+        verify(inputDriver).getUserInput();
+        verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
     }
 }

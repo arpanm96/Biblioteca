@@ -16,8 +16,8 @@ import static org.mockito.Mockito.verify;
 
 public class ListMovieActionTest {
 
-    Collection<Movie> movieCollection;
-    Collection<String> movieDetails;
+    Collection<Movie> movieDetails;
+    Collection<String> bookDetails;
 
     Library library;
     InputDriver inputDriver;
@@ -28,15 +28,15 @@ public class ListMovieActionTest {
         library = mock(Library.class);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        movieDetails = library.getLibraryItemDetails(ItemType.MOVIE);
+        bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
     }
 
 
     @DisplayName("list movies")
     @Test
     void shouldListMovies() {
-        MainMenu.LIST_MOVIES.perform(library, inputDriver, outputDriver);
-        verify(outputDriver).printBookList(movieDetails);
-        verify(library,times(2)).getLibraryItemDetails(ItemType.MOVIE);
+        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver);
+        verify(outputDriver).printBookList(bookDetails);
+        verify(library,times(2)).getLibraryItemDetails(ItemType.BOOK);
     }
 }

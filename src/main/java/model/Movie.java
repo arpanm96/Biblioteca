@@ -15,6 +15,10 @@ public class Movie implements Item {
         this.year = year;
     }
 
+    public Movie(String name) {
+        this.name = name;
+    }
+
     @Override
     public ItemType getItemType() {
         return ItemType.MOVIE;
@@ -25,18 +29,12 @@ public class Movie implements Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return movieRating == movie.movieRating &&
-                year == movie.year &&
-                Objects.equals(name, movie.name) &&
-                Objects.equals(director, movie.director);
+        return name.trim().equalsIgnoreCase(movie.name.trim());
     }
 
     @Override
     public String toString() {
-        return name +
-                "," + director +
-                "," + movieRating +
-                "," + year;
+        return name + "," + director + "," + movieRating + "," + year;
     }
 
     @Override

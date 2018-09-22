@@ -1,4 +1,5 @@
 
+import common.Message;
 import controller.MainMenu;
 import model.Book;
 import model.LibraryItemRepository;
@@ -38,12 +39,12 @@ public class ReturnBookActionTest {
     @DisplayName("should not return back an already present book")
     @Test
     void shouldNotReturnBook() {
-        when(inputDriver.getBookToBeCheckedOut()).thenReturn("The Lord Of The Rings");
-        MainMenu.CHECKOUT.perform(library, inputDriver, outputDriver);
-        verify(inputDriver).getBookToBeCheckedOut();
-        verify(outputDriver).printBookCheckedOut();
+        when(inputDriver.getUserInput()).thenReturn("The Lord Of The Rings");
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver);
+        verify(inputDriver).getUserInput();
+        verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
 
-        when(inputDriver.getBookToBeReturned()).thenReturn("The Hobbit");
+        when(inputDriver.getUserInput()).thenReturn("The Hobbit");
         MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver);
         verify(outputDriver).printBookNotReturned();
     }
@@ -51,13 +52,13 @@ public class ReturnBookActionTest {
     @DisplayName("should return back a checked out book")
     @Test
     void shouldReturnBook() {
-        when(inputDriver.getBookToBeCheckedOut()).thenReturn("The Hobbit");
-        MainMenu.CHECKOUT.perform(library, inputDriver, outputDriver);
-        verify(inputDriver).getBookToBeCheckedOut();
-        verify(outputDriver).printBookCheckedOut();
+        when(inputDriver.getUserInput()).thenReturn("The Hobbit");
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver);
+        verify(inputDriver).getUserInput();
+        verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
 
 
-        when(inputDriver.getBookToBeReturned()).thenReturn("The Hobbit");
+        when(inputDriver.getUserInput()).thenReturn("The Hobbit");
         MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver);
         verify(outputDriver).printBookReturned();
     }

@@ -1,5 +1,6 @@
-package action;
+package action.book;
 
+import common.Message;
 import controller.Action;
 import model.Book;
 import model.Library;
@@ -9,11 +10,11 @@ import view.OutputDriver;
 public class CheckOutBookAction implements Action {
     @Override
     public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-        Book bookToBeCheckedOut = new Book(inputDriver.getBookToBeCheckedOut());
+        Book bookToBeCheckedOut = new Book(inputDriver.getUserInput());
         if (library.checkoutItem(bookToBeCheckedOut)) {
-            outputDriver.printBookCheckedOut();
+            outputDriver.print(Message.SUCCESSFUL_BOOK_CHECKOUT);
         } else {
-            outputDriver.printBookNotCheckedOut();
+            outputDriver.print(Message.UNSUCCESSFUL_BOOK_CHECKOUT);
         }
     }
 }

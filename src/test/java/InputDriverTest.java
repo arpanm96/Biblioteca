@@ -23,7 +23,7 @@ class InputDriverTest {
         setSystemIn("The Hobbit\n");
 
         InputDriver inputDriver = new InputDriver();
-        assertEquals("The Hobbit", inputDriver.getBookToBeCheckedOut());
+        assertEquals("The Hobbit", inputDriver.getUserInput());
     }
 
     private void setSystemIn(String string) {
