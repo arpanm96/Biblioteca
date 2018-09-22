@@ -13,5 +13,5 @@ public class Message {
     public final static String SUCCESSFUL_RETURN = "Thank you for returning the book.";
     public final static String UNSUCCESSFUL_RETURN = "That is not a valid book to return";
     public final static String MENU_SEPERATOR = "=";
-    public static final String LIST_MOVIES = "List Movies";
+    public static final String LIST_MOVIES = "List Movie";
 }

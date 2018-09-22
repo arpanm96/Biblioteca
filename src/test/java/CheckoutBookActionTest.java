@@ -1,6 +1,6 @@
 import controller.MainMenu;
 import model.Book;
-import model.BookRepository;
+import model.LibraryItemRepository;
 import model.ItemType;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ class CheckoutBookActionTest {
 
     @BeforeEach
     void initEach() {
-        library = new Library(new BookRepository().generateDefaultItemList());
+        library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);

@@ -1,5 +1,5 @@
 import model.Book;
-import model.BookRepository;
+import model.LibraryItemRepository;
 import model.ItemType;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +24,7 @@ public class ViewFormatterTest {
 
     @BeforeEach
     void initEach() {
-        library = new Library( new BookRepository().generateDefaultItemList());
+        library = new Library( new LibraryItemRepository().generateDefaultItemList());
         outputDriver = new OutputDriver();
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);

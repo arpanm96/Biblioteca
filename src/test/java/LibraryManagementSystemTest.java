@@ -1,6 +1,6 @@
 
 import controller.LibraryManagementSystem;
-import model.BookRepository;
+import model.LibraryItemRepository;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -22,7 +22,7 @@ class LibraryManagementSystemTest {
     void initEach(){
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        library = new Library( new BookRepository().generateDefaultItemList());
+        library = new Library( new LibraryItemRepository().generateDefaultItemList());
         libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library);
     }
 

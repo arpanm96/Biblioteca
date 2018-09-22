@@ -1,7 +1,7 @@
 /*
 import controller.LibraryManagementSystem;
 import model.Book;
-import model.BookRepository;
+import model.LibraryItemRepository;
 import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +41,7 @@ class LibraryTest {
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
 
-        library =  new Library( new BookRepository().generateDefaultItemList());
+        library =  new Library( new LibraryItemRepository().generateDefaultItemList());
         libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver, library);
     }
 

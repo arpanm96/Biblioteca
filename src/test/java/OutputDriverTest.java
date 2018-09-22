@@ -1,5 +1,5 @@
 import controller.LibraryManagementSystem;
-import model.BookRepository;
+import model.LibraryItemRepository;
 import model.ItemType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -28,7 +28,7 @@ class OutputDriverTest {
         Book booksMock1 = mock(Book.class);
         Book booksMock2 = mock(Book.class);
         booksList = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
-        library = new Library( new BookRepository().generateDefaultItemList());
+        library = new Library( new LibraryItemRepository().generateDefaultItemList());
         libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputDriver, library);
     }
 

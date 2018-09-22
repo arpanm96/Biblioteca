@@ -19,7 +19,7 @@ public class Library {
 
     public Collection<String> getLibraryItemDetails(ItemType itemType) {
         return this.itemList.stream().
-                filter((item -> item.getItemType().equals(ItemType.BOOK))).
+                filter((item -> item.getItemType().equals(itemType))).
                 map(book -> (book.toString())).
                 collect(Collectors.toList());
     }

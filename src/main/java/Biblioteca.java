@@ -1,5 +1,5 @@
 import controller.LibraryManagementSystem;
-import model.BookRepository;
+import model.LibraryItemRepository;
 import model.Library;
 import view.InputDriver;
 import view.OutputDriver;
@@ -12,7 +12,7 @@ public class Biblioteca {
     public static void main(String[] args) {
         InputDriver inputDriver = new InputDriver();
         OutputDriver outputDriver = new OutputDriver();
-        Library library = new Library(new BookRepository().generateDefaultItemList());
+        Library library = new Library(new LibraryItemRepository().generateDefaultItemList());
         LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library);
         libraryManagementSystem.start();
         libraryManagementSystem.performOnMenuChoice();

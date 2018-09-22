@@ -2,6 +2,7 @@ package view;
 
 import common.*;
 import controller.MainMenu;
+import model.ItemType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +19,17 @@ public class OutputDriver {
 
     public void printBookList(Collection<String> itemDetails) {
         ArrayList<String> items = new ArrayList<>(itemDetails);
-        items.add(0, "Title,Author,Year Published");
+        items.add(0, ItemType.BOOK.getItemHeaders());
+        printFormattedList(items);
+    }
+
+    public void printMovieList(Collection<String> itemDetails) {
+        ArrayList<String> items = new ArrayList<>(itemDetails);
+        items.add(0, ItemType.MOVIE.getItemHeaders());
+        printFormattedList(items);
+    }
+
+    private void printFormattedList(ArrayList<String> items) {
         Collection<String> bookDetailsFormattedColomns = new ViewFormatter().formatAccordingToColomns(items);
         for (String item : bookDetailsFormattedColomns) {
             System.out.println(item);
