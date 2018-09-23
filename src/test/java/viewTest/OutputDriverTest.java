@@ -32,7 +32,7 @@ class OutputDriverTest {
         outputDriver = new OutputDriver();
         Book booksMock1 = mock(Book.class);
         Book booksMock2 = mock(Book.class);
-        userAccount = mock(UserAccount.class);
+        userAccount = new UserAccount();;
         booksList = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
         library = new Library( new LibraryItemRepository().generateDefaultItemList());
         libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputDriver, library, userAccount);

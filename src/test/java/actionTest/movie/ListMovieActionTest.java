@@ -30,7 +30,7 @@ public class ListMovieActionTest {
 
     @BeforeEach
     void initEach() {
-        userAccount = mock(UserAccount.class);
+        userAccount = new UserAccount();;
         library = mock(Library.class);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);

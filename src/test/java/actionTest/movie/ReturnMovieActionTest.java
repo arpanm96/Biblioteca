@@ -32,7 +32,7 @@ public class ReturnMovieActionTest {
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
         movieDetails = library.getLibraryItemDetails(ItemType.BOOK);
-        userAccount = mock(UserAccount.class);
+        userAccount = new UserAccount();;
     }
 
     @DisplayName("should not return back an already present movie")

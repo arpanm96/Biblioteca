@@ -35,7 +35,7 @@ class LibraryTest {
     void initEach() {
         inputMockDriver = new InputDriver();
         outputMockDriver = mock(OutputDriver.class);
-        userAccount = mock(UserAccount.class);
+        userAccount = new UserAccount();;
 
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);

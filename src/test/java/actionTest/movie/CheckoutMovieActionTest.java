@@ -27,19 +27,22 @@ public class CheckoutMovieActionTest {
     Library library;
     InputDriver inputDriver;
     OutputDriver outputDriver;
+    User user;
 
     @BeforeEach
     void initEach() {
+        user = new User("123-4567", "Arpan");
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = mock(UserAccount.class);
+        userAccount = new UserAccount();;
         movieDetails = library.getLibraryItemDetails(ItemType.MOVIE);
     }
 
     @DisplayName("verify movie is not checked out")
     @Test
     void shouldNotCheckoutMovie() {
+        userAccount.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("A Random Movie");
         MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();
@@ -49,6 +52,7 @@ public class CheckoutMovieActionTest {
     @DisplayName("verify movie is checked out")
     @Test
     void shouldCheckoutMovie() {
+        userAccount.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("Shawshank Redemption");
         MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();

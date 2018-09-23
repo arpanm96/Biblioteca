@@ -40,7 +40,7 @@ public class ListBookActionTest {
         outputDriver = mock(OutputDriver.class);
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
-        userAccount = mock(UserAccount.class);
+        userAccount = new UserAccount();;
         bookCollection = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);

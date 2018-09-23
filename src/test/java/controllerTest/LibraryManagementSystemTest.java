@@ -26,7 +26,7 @@ class LibraryManagementSystemTest {
     void initEach(){
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = mock(UserAccount.class);
+        userAccount = new UserAccount();;
         library = new Library( new LibraryItemRepository().generateDefaultItemList());
         libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAccount);
     }

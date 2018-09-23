@@ -32,7 +32,7 @@ class ActionTest {
     Action action;
     @BeforeEach
     void initEach() {
-        userAccount = mock(UserAccount.class);
+        userAccount = new UserAccount();;
         action = mock(Action.class);
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
