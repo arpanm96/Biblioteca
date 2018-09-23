@@ -6,6 +6,7 @@ import controller.MainMenu;
 import model.library.LibraryItemRepository;
 import model.library.Library;
 import model.user.UserAccount;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class LibraryManagementSystemTest {
     void initEach(){
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount();;
+        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());;
         library = new Library( new LibraryItemRepository().generateDefaultItemList());
         libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAccount);
     }

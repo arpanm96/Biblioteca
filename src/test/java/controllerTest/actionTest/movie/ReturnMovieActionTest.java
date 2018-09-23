@@ -7,6 +7,7 @@ import model.library.Library;
 import model.library.LibraryItemRepository;
 import model.user.User;
 import model.user.UserAccount;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ class ReturnMovieActionTest {
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
         movieDetails = library.getLibraryItemDetails(ItemType.MOVIE);
-        userAccount = new UserAccount();
+        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());
         user = new User("123-4567", "Arpan");
     }
 

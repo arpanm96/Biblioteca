@@ -13,7 +13,7 @@ public class CheckOutBookAction implements Action {
     @Override
     public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAccount userAccount) {
         Book bookToBeCheckedOut = new Book(inputDriver.getUserInput());
-        if (library.checkoutItem(bookToBeCheckedOut)) {
+        if (library.checkoutItem(bookToBeCheckedOut, userAccount)) {
             outputDriver.print(Message.SUCCESSFUL_BOOK_CHECKOUT);
         } else {
             outputDriver.print(Message.UNSUCCESSFUL_BOOK_CHECKOUT);

@@ -1,16 +1,15 @@
 package model.user;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 public class UserAccount {
     private Collection<User> userCollection;
     private Collection<User> loggedInUser;
 
-    public UserAccount() {
+    public UserAccount(Collection<User> userCollection) {
         loggedInUser = new ArrayList<>();
-        userCollection = new ArrayList<>(Arrays.asList(new User("123-4567", "Arpan")));
+        this.userCollection = userCollection;
     }
 
     public boolean logIn(User user) {
@@ -22,7 +21,7 @@ public class UserAccount {
     }
 
     public boolean logOut() {
-        if(isUserLoggedIn()) {
+        if (isUserLoggedIn()) {
             loggedInUser.clear();
             return true;
         }
@@ -31,5 +30,9 @@ public class UserAccount {
 
     public boolean isUserLoggedIn() {
         return !loggedInUser.isEmpty();
+    }
+
+    public User getCurrentlyLoggedInUser() {
+        return (User) (loggedInUser.toArray()[0]);
     }
 }

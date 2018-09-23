@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class ViewFormatterTest {
 
-    Book theHobbit;
-    Book theLordOfTheRings;
     Collection<String> bookDetails;
 
     Library library;
@@ -29,17 +29,19 @@ public class ViewFormatterTest {
         library = new Library( new LibraryItemRepository().generateDefaultItemList());
         outputDriver = new OutputDriver();
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
-        theHobbit = new Book("The Hobbit", "Tolkien", 1937);
-        theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
     }
 
     @DisplayName("should return correct formatted string for book The Hobbit")
     @Test
-    void shouldReturnFormattedTheHobbit() {
+    void shouldReturnTheBookDetailInFormattedManner() {
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         ViewFormatter viewFormatter = new ViewFormatter();
         String firstRow = "Title,Author,Year Published";
-        outputDriver.printBookList(viewFormatter.formatAccordingToColomns(new ArrayList<>(Arrays.asList(firstRow))));
-        outputDriver.printBookList(viewFormatter.formatAccordingToColomns(bookDetails));
+        //outputDriver.printBookList(viewFormatter.formatAccordingToColomns(new ArrayList<>(Arrays.asList(firstRow))));
+        //outputDriver.printBookList(viewFormatter.formatAccordingToColomns(bookDetails));
+        assertEquals(new ArrayList<>(Arrays.asList("The Hobbit            " +
+                "        Tolkien                       1937                          ","The Lord Of The Rings" +
+                        "         Tolkien                       1954                          "))
+                ,viewFormatter.formatAccordingToColomns(library.getLibraryItemDetails(ItemType.BOOK)));
     }
 }

@@ -12,7 +12,7 @@ public class CheckOutMovieAction implements Action {
     @Override
     public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAccount userAccount) {
         Movie movieToBeCheckedOut = new Movie(inputDriver.getUserInput());
-        if (library.checkoutItem(movieToBeCheckedOut)) {
+        if (library.checkoutItem(movieToBeCheckedOut, userAccount)) {
             outputDriver.print(Message.SUCCESSFUL_MOVIE_CHECKOUT);
         } else {
             outputDriver.print(Message.UNSUCCESSFUL_MOVIE_CHECKOUT);

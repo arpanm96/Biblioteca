@@ -5,6 +5,7 @@ import model.library.ItemType;
 import model.library.Library;
 import model.library.Movie;
 import model.user.UserAccount;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class ListMovieActionTest {
 
     @BeforeEach
     void initEach() {
-        userAccount = new UserAccount();;
+        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());;
         library = mock(Library.class);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);

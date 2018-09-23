@@ -2,6 +2,7 @@ package modelTest.user;
 
 import model.user.User;
 import model.user.UserAccount;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class UserAccountTest {
     UserAccount userAccount;
     @BeforeEach
     void initEach() {
-        userAccount = new UserAccount();
+        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());
     }
 
     @DisplayName("should not allow login to unknown users")
@@ -35,12 +36,6 @@ class UserAccountTest {
     @Test
     void shouldReturnTrueIfUserIsLoggedIn() {
         assertTrue(userAccount.logIn(knownUser));
-    }
-
-    @DisplayName("should return false if known user is not logged in")
-    @Test
-    void shouldReturnFalseIfUserIsNotLoggedIn() {
-        assertFalse(userAccount.logIn(unknownUser));
     }
 
     @DisplayName("should allow user to log out if they are already logged in")

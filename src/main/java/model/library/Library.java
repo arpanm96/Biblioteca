@@ -1,9 +1,11 @@
 package model.library;
 
 import model.user.User;
+import model.user.UserAccount;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,7 @@ public class Library {
 
     public Library(Collection<Item> itemList) {
         itemToBeReturnedList = new ArrayList<>();
+        itemToBeReturnedByUser = new HashMap<>();
         this.itemList = itemList;
     }
 
@@ -29,10 +32,10 @@ public class Library {
                 collect(Collectors.toList());
     }
 
-    public boolean checkoutItem(Item itemToBeCheckedOut) {
+    public boolean checkoutItem(Item itemToBeCheckedOut, UserAccount userAccount) {
         for (Item item : itemList) {
             if (item.equals(itemToBeCheckedOut)) {
-                //itemToBeReturnedByUser.put(item, loggedInUser);
+                itemToBeReturnedByUser.put(item, userAccount.getCurrentlyLoggedInUser());
                 itemToBeReturnedList.add(item);
                 itemList.remove(item);
                 return true;

@@ -4,6 +4,7 @@ import common.Message;
 import controller.MainMenu;
 import model.library.Library;
 import model.user.UserAccount;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class LogInActionTest {
     void initEach() {
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount();
+        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());
     }
 
     @DisplayName("should login user")

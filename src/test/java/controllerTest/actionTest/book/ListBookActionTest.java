@@ -5,6 +5,7 @@ import model.library.Book;
 import model.library.ItemType;
 import model.library.Library;
 import model.user.UserAccount;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ public class ListBookActionTest {
         outputDriver = mock(OutputDriver.class);
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
-        userAccount = new UserAccount();;
+        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());;
         bookCollection = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);

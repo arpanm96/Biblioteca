@@ -7,6 +7,7 @@ import model.library.LibraryItemRepository;
 import model.library.ItemType;
 import model.library.Library;
 import model.user.UserAccount;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -32,7 +33,7 @@ class ActionTest {
     Action action;
     @BeforeEach
     void initEach() {
-        userAccount = new UserAccount();;
+        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());;
         action = mock(Action.class);
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
