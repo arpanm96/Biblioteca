@@ -1,6 +1,6 @@
 import controller.LibraryManagementSystem;
-import model.LibraryItemRepository;
-import model.Library;
+import model.library.LibraryItemRepository;
+import model.library.Library;
 import view.InputDriver;
 import view.OutputDriver;
 

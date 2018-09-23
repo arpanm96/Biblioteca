@@ -1,6 +1,7 @@
 package controller;
 
-import model.Library;
+import common.Message;
+import model.library.Library;
 import view.InputDriver;
 import view.OutputDriver;
 
@@ -39,7 +40,7 @@ public class LibraryManagementSystem {
             if (isValidInput(choice)) {
                 displayMenuChoice(choice);
             } else {
-                outputDriver.printInvalidMenuChoice();
+                outputDriver.print(Message.INVALID_INPUT);
             }
             outputDriver.printMainMenu();
         }

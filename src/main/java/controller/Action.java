@@ -1,6 +1,6 @@
 package controller;
 
-import model.Library;
+import model.library.Library;
 import view.InputDriver;
 import view.OutputDriver;
 

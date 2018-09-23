@@ -2,7 +2,7 @@ package view;
 
 import common.*;
 import controller.MainMenu;
-import model.ItemType;
+import model.library.ItemType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,10 +48,6 @@ public class OutputDriver {
             System.out.println(i++ + "  " + menu);
         }
         printMenuSeparator();
-    }
-
-    public void printInvalidMenuChoice() {
-        System.out.println(Message.INVALID_INPUT);
     }
 
     public void print(String message) {
