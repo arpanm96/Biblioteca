@@ -19,7 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ReturnMovieActionTest {
+class ReturnMovieActionTest {
     UserAccount userAccount;
     Collection<String> movieDetails;
 

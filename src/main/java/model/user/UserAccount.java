@@ -21,6 +21,10 @@ public class UserAccount {
         return true;
     }
 
+    public void logOut() {
+        loggedInUser.clear();
+    }
+
     public boolean isUserLoggedIn() {
         return !loggedInUser.isEmpty();
     }

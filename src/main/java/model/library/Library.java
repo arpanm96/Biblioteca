@@ -32,6 +32,7 @@ public class Library {
     public boolean checkoutItem(Item itemToBeCheckedOut) {
         for (Item item : itemList) {
             if (item.equals(itemToBeCheckedOut)) {
+                //itemToBeReturnedByUser.put(item,loggedInUser);
                 itemToBeReturnedList.add(item);
                 itemList.remove(item);
                 return true;
@@ -40,8 +41,8 @@ public class Library {
         return false;
     }
 
-/*    public boolean checkoutItemByUser(Item itemToBeCheckedOut,User user) {
-        for (Map m: Map.Entry<String,String>) {
+/*   public boolean checkoutItemByUser(Item itemToBeCheckedOut,User user) {
+        for (Map.Entry m:map.entrySet()) {
             if (item.equals(itemToBeCheckedOut)) {
                 itemToBeReturnedList.add(item);
                 itemList.remove(item);

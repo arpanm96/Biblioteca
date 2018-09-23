@@ -9,6 +9,7 @@ import action.book.ReturnBookAction;
 import action.movie.CheckOutMovieAction;
 import action.movie.ListMovieAction;
 import action.movie.ReturnMovieAction;
+import action.user.LogOutAction;
 import common.Message;
 import model.library.Library;
 import model.user.UserAccount;
@@ -22,7 +23,8 @@ public enum MainMenu {
     CHECKOUT_BOOK(Message.CHECKOUT_BOOK, new AuthorisedUserAction(new CheckOutBookAction())),
     CHECKOUT_MOVIE(Message.CHECKOUT_MOVIE, new AuthorisedUserAction(new CheckOutMovieAction())),
     RETURN_BOOK(Message.RETURN_BOOK, new AuthorisedUserAction(new ReturnBookAction())),
-    RETURN_MOVIE(Message.RETURN_MOVIE, new ReturnMovieAction()),
+    RETURN_MOVIE(Message.RETURN_MOVIE, new AuthorisedUserAction(new ReturnMovieAction())),
+    LOG_OUT(Message.LOG_OUT,new LogOutAction()),
     QUIT(Message.QUIT, new QuitAction()) {
     };
 

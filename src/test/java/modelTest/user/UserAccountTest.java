@@ -30,4 +30,18 @@ class UserAccountTest {
     void shouldAllowKnownUserToLogIn() {
         assertTrue(userAccount.logIn(knownUser));
     }
+
+    @DisplayName("should return true if known user is logged in")
+    @Test
+    void shouldReturnTrueIfUserIsLoggedIn() {
+        userAccount.logIn(knownUser);
+        assertTrue(userAccount.logIn(knownUser));
+    }
+
+    @DisplayName("should return false if known user is not logged in")
+    @Test
+    void shouldReturnFalseIfUserIsNotLoggedIn() {
+        userAccount.logIn(knownUser);
+        assertFalse(userAccount.logIn(unknownUser));
+    }
 }

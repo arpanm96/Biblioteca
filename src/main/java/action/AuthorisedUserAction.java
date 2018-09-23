@@ -8,7 +8,7 @@ import view.InputDriver;
 import view.OutputDriver;
 
 public class AuthorisedUserAction implements Action {
-    Action action;
+    private Action action;
 
     public AuthorisedUserAction(Action action) {
         this.action = action;
