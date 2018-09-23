@@ -5,6 +5,7 @@ import controller.MainMenu;
 import model.library.ItemType;
 import model.library.Library;
 import model.library.LibraryItemRepository;
+import model.user.User;
 import model.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,6 +26,7 @@ public class ReturnMovieActionTest {
     Library library;
     InputDriver inputDriver;
     OutputDriver outputDriver;
+    User user;
 
     @BeforeEach
     void initEach() {
@@ -32,12 +34,14 @@ public class ReturnMovieActionTest {
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
         movieDetails = library.getLibraryItemDetails(ItemType.BOOK);
-        userAccount = new UserAccount();;
+        userAccount = new UserAccount();
+        user = new User("123-4567", "Arpan");
     }
 
     @DisplayName("should not return back an already present movie")
     @Test
     void shouldNotReturnMovie() {
+        userAccount.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("Se7en");
         MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();
@@ -51,6 +55,7 @@ public class ReturnMovieActionTest {
     @DisplayName("should return back a checked out movie")
     @Test
     void shouldReturnMovie() {
+        userAccount.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("Se7en");
         MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();

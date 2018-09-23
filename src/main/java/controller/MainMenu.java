@@ -21,7 +21,7 @@ public enum MainMenu {
     LOG_IN(Message.LOG_IN, new LogInAction()),
     CHECKOUT_BOOK(Message.CHECKOUT_BOOK, new AuthorisedUserAction(new CheckOutBookAction())),
     CHECKOUT_MOVIE(Message.CHECKOUT_MOVIE, new AuthorisedUserAction(new CheckOutMovieAction())),
-    RETURN_BOOK(Message.RETURN_BOOK, new ReturnBookAction()),
+    RETURN_BOOK(Message.RETURN_BOOK, new AuthorisedUserAction(new ReturnBookAction())),
     RETURN_MOVIE(Message.RETURN_MOVIE, new ReturnMovieAction()),
     QUIT(Message.QUIT, new QuitAction()) {
     };

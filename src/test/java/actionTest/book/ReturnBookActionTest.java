@@ -29,6 +29,7 @@ public class ReturnBookActionTest {
     Library library;
     InputDriver inputDriver;
     OutputDriver outputDriver;
+    User user;
 
     @BeforeEach
     void initEach() {
@@ -39,11 +40,13 @@ public class ReturnBookActionTest {
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
+        user = new User("123-4567", "Arpan");
     }
 
     @DisplayName("should not return back an already present book")
     @Test
     void shouldNotReturnBook() {
+        userAccount.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("The Lord Of The Rings");
         MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();
@@ -57,6 +60,7 @@ public class ReturnBookActionTest {
     @DisplayName("should return back a checked out book")
     @Test
     void shouldReturnBook() {
+        userAccount.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
         MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();
