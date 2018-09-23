@@ -14,15 +14,19 @@ public class UserAccount {
     }
 
     public boolean logIn(User user) {
-        if(!userCollection.contains(user)) {
+        if (!userCollection.contains(user) || loggedInUser.contains(user)) {
             return false;
         }
         loggedInUser.add(user);
         return true;
     }
 
-    public void logOut() {
-        loggedInUser.clear();
+    public boolean logOut() {
+        if(isUserLoggedIn()) {
+            loggedInUser.clear();
+            return true;
+        }
+        return false;
     }
 
     public boolean isUserLoggedIn() {

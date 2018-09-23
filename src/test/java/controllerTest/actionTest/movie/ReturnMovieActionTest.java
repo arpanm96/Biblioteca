@@ -1,4 +1,4 @@
-package actionTest.movie;
+package controllerTest.actionTest.movie;
 
 import common.Message;
 import controller.MainMenu;
@@ -19,8 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class CheckoutMovieActionTest {
-
+class ReturnMovieActionTest {
     UserAccount userAccount;
     Collection<String> movieDetails;
 
@@ -31,31 +30,40 @@ public class CheckoutMovieActionTest {
 
     @BeforeEach
     void initEach() {
-        user = new User("123-4567", "Arpan");
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount();;
         movieDetails = library.getLibraryItemDetails(ItemType.MOVIE);
+        userAccount = new UserAccount();
+        user = new User("123-4567", "Arpan");
     }
 
-    @DisplayName("verify movie is not checked out")
+    @DisplayName("should not return back an already present movie")
     @Test
-    void shouldNotCheckoutMovie() {
+    void shouldNotReturnMovie() {
         userAccount.logIn(user);
-        when(inputDriver.getUserInput()).thenReturn("A Random Movie");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
-        verify(inputDriver).getUserInput();
-        verify(outputDriver).print(Message.UNSUCCESSFUL_MOVIE_CHECKOUT);
-    }
-
-    @DisplayName("verify movie is checked out")
-    @Test
-    void shouldCheckoutMovie() {
-        userAccount.logIn(user);
-        when(inputDriver.getUserInput()).thenReturn("Shawshank Redemption");
+        when(inputDriver.getUserInput()).thenReturn("Se7en");
         MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_CHECKOUT);
+
+        when(inputDriver.getUserInput()).thenReturn("Shawshank Redemption");
+        MainMenu.RETURN_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        verify(outputDriver).print(Message.UNSUCCESSFUL_MOVIE_RETURN);
+    }
+
+    @DisplayName("should return back a checked out movie")
+    @Test
+    void shouldReturnMovie() {
+        userAccount.logIn(user);
+        when(inputDriver.getUserInput()).thenReturn("Se7en");
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        verify(inputDriver).getUserInput();
+        verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_CHECKOUT);
+
+
+        when(inputDriver.getUserInput()).thenReturn("Se7en");
+        MainMenu.RETURN_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_RETURN);
     }
 }

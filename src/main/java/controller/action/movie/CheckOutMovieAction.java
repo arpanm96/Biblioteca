@@ -1,4 +1,4 @@
-package action.movie;
+package controller.action.movie;
 
 import common.Message;
 import controller.Action;

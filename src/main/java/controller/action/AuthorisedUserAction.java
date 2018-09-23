@@ -1,4 +1,4 @@
-package action;
+package controller.action;
 
 import common.Message;
 import controller.Action;

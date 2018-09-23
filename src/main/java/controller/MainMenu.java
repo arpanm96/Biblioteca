@@ -1,15 +1,15 @@
 package controller;
 
-import action.AuthorisedUserAction;
-import action.user.LogInAction;
-import action.QuitAction;
-import action.book.CheckOutBookAction;
-import action.book.ListBookAction;
-import action.book.ReturnBookAction;
-import action.movie.CheckOutMovieAction;
-import action.movie.ListMovieAction;
-import action.movie.ReturnMovieAction;
-import action.user.LogOutAction;
+import controller.action.AuthorisedUserAction;
+import controller.action.user.LogInAction;
+import controller.action.QuitAction;
+import controller.action.book.CheckOutBookAction;
+import controller.action.book.ListBookAction;
+import controller.action.book.ReturnBookAction;
+import controller.action.movie.CheckOutMovieAction;
+import controller.action.movie.ListMovieAction;
+import controller.action.movie.ReturnMovieAction;
+import controller.action.user.LogOutAction;
 import common.Message;
 import model.library.Library;
 import model.user.UserAccount;

@@ -1,4 +1,4 @@
-package action.user;
+package controller.action.user;
 
 import common.Message;
 import controller.Action;
@@ -13,10 +13,10 @@ public class LogInAction implements Action {
     public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAccount userAccount) {
         User user = new User(inputDriver.getUserInput(), inputDriver.getUserInput());
         if(userAccount.logIn(user)) {
-            System.out.println(Message.LOG_IN_USER_FOUND);
+            outputDriver.print(Message.LOG_IN_SUCCESSFUL);
         }
         else {
-            System.out.println(Message.LOG_IN_USER_NOT_FOUND);
+            outputDriver.print(Message.LOG_IN_UNSUCCESSFUL);
         }
     }
 }

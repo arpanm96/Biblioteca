@@ -21,8 +21,10 @@ public class Message {
     public static final String LIST_MOVIES = "List Movie";
     public static final String RETURN_MOVIE = "Return Movie";
     public static final String LOG_IN = "Log In";
-    public static final String LOG_IN_USER_NOT_FOUND = "No such user found";
-    public static final String LOG_IN_USER_FOUND = "Successfully logged in";
+    public static final String LOG_IN_UNSUCCESSFUL = "No such user found";
+    public static final String LOG_IN_SUCCESSFUL = "Successfully logged in";
     public static final String PLEASE_LOG_IN = "Please log in to access this functionality";
     public static final String LOG_OUT = "Log Out";
+    public static final String LOG_OUT_SUCCESSFUL = "Logged out successfully";
+    public static final String LOG_OUT_UNSUCCESSFUL = "Not logged in already";
 }

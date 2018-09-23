@@ -1,4 +1,4 @@
-package actionTest.book;
+package controllerTest.actionTest.book;
 
 import controller.MainMenu;
 import model.library.Book;

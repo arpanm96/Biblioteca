@@ -1,4 +1,4 @@
-package action.book;
+package controller.action.book;
 
 import controller.Action;
 import model.library.ItemType;

@@ -1,4 +1,4 @@
-package actionTest.book;
+package controllerTest.actionTest.book;
 
 import common.Message;
 import controller.MainMenu;

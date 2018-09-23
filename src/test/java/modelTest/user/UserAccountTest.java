@@ -34,14 +34,25 @@ class UserAccountTest {
     @DisplayName("should return true if known user is logged in")
     @Test
     void shouldReturnTrueIfUserIsLoggedIn() {
-        userAccount.logIn(knownUser);
         assertTrue(userAccount.logIn(knownUser));
     }
 
     @DisplayName("should return false if known user is not logged in")
     @Test
     void shouldReturnFalseIfUserIsNotLoggedIn() {
-        userAccount.logIn(knownUser);
         assertFalse(userAccount.logIn(unknownUser));
+    }
+
+    @DisplayName("should allow user to log out if they are already logged in")
+    @Test
+    void shouldReturnTrueIfUserIsLoggedOut() {
+        assertTrue(userAccount.logIn(knownUser));
+        assertTrue(userAccount.logOut());
+    }
+
+    @DisplayName("shouldn't allow user to log out if they are not already logged in")
+    @Test
+    void shouldReturnFalseIfUserIsLoggedOut() {
+        assertFalse(userAccount.logOut());
     }
 }

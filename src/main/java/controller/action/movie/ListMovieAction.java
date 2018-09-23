@@ -1,4 +1,4 @@
-package action.movie;
+package controller.action.movie;
 
 import controller.Action;
 import model.library.ItemType;

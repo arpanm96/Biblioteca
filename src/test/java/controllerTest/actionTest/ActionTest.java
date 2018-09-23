@@ -1,4 +1,4 @@
-package actionTest;
+package controllerTest.actionTest;
 
 import controller.Action;
 import controller.MainMenu;

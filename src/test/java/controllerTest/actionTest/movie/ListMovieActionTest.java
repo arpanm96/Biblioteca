@@ -1,10 +1,9 @@
-package actionTest.movie;
+package controllerTest.actionTest.movie;
 
 import controller.MainMenu;
 import model.library.ItemType;
 import model.library.Library;
 import model.library.Movie;
-import model.user.User;
 import model.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

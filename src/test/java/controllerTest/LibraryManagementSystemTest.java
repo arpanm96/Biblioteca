@@ -2,6 +2,7 @@ package controllerTest;
 
 import common.Message;
 import controller.LibraryManagementSystem;
+import controller.MainMenu;
 import model.library.LibraryItemRepository;
 import model.library.Library;
 import model.user.UserAccount;
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.*;
 
 class LibraryManagementSystemTest {
 
-    public static final int QUIT_VALUE = 8;
+    public static final int QUIT_VALUE = MainMenu.values().length;
     UserAccount userAccount;
     OutputDriver outputDriver;
     InputDriver inputDriver;
