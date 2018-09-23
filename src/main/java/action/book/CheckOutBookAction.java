@@ -1,4 +1,4 @@
-package actionTest.book;
+package action.book;
 
 import common.Message;
 import controller.Action;

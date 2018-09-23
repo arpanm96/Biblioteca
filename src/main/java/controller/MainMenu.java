@@ -1,12 +1,12 @@
 package controller;
 
-import actionTest.*;
-import actionTest.book.CheckOutBookAction;
-import actionTest.book.ListBookAction;
-import actionTest.book.ReturnBookAction;
-import actionTest.movie.CheckOutMovieAction;
-import actionTest.movie.ListMovieAction;
-import actionTest.movie.ReturnMovieAction;
+import action.QuitAction;
+import action.book.CheckOutBookAction;
+import action.book.ListBookAction;
+import action.book.ReturnBookAction;
+import action.movie.CheckOutMovieAction;
+import action.movie.ListMovieAction;
+import action.movie.ReturnMovieAction;
 import common.Message;
 import model.library.Library;
 import view.InputDriver;
