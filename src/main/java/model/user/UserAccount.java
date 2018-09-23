@@ -6,9 +6,10 @@ import java.util.Collection;
 
 public class UserAccount {
     private Collection<User> userCollection;
-    //private isLoggedIn
+    private Collection<User> loggedInUser;
 
     public UserAccount() {
+        loggedInUser = new ArrayList<>();
         userCollection = new ArrayList<>(Arrays.asList(new User("123-4567", "Arpan")));
     }
 
@@ -16,6 +17,11 @@ public class UserAccount {
         if(!userCollection.contains(user)) {
             return false;
         }
+        loggedInUser.add(user);
         return true;
+    }
+
+    public boolean isUserLoggedIn() {
+        return !loggedInUser.isEmpty();
     }
 }

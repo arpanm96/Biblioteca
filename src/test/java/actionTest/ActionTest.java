@@ -6,6 +6,7 @@ import model.library.Book;
 import model.library.LibraryItemRepository;
 import model.library.ItemType;
 import model.library.Library;
+import model.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.verify;
 
 class ActionTest {
 
+    UserAccount userAccount;
     Book theHobbit;
     Book theLordOfTheRings;
     Collection<String> bookDetails;
@@ -30,6 +32,7 @@ class ActionTest {
     Action action;
     @BeforeEach
     void initEach() {
+        userAccount = mock(UserAccount.class);
         action = mock(Action.class);
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
@@ -43,7 +46,7 @@ class ActionTest {
     @DisplayName("check if act is being called for menu list")
     @Test
     void checkActBeingCalledForListMenu() {
-        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver);
-        verify(action).act(library, inputDriver, outputDriver);
+        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver, userAccount);
+        verify(action).act(library, inputDriver, outputDriver, userAccount);
     }
 }

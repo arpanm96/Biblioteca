@@ -4,6 +4,7 @@ import common.Message;
 import controller.LibraryManagementSystem;
 import model.library.LibraryItemRepository;
 import model.library.Library;
+import model.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,8 @@ import static org.mockito.Mockito.*;
 
 class LibraryManagementSystemTest {
 
-    public static final int QUIT_VALUE = 7;
+    public static final int QUIT_VALUE = 8;
+    UserAccount userAccount;
     OutputDriver outputDriver;
     InputDriver inputDriver;
     Library library;
@@ -24,8 +26,9 @@ class LibraryManagementSystemTest {
     void initEach(){
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
+        userAccount = mock(UserAccount.class);
         library = new Library( new LibraryItemRepository().generateDefaultItemList());
-        libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library);
+        libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAccount);
     }
 
     @DisplayName("should call the implicit functions of start")

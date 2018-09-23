@@ -4,6 +4,7 @@ import controller.MainMenu;
 import model.library.Book;
 import model.library.ItemType;
 import model.library.Library;
+import model.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,7 @@ public class ListBookActionTest {
     Library library;
     InputDriver inputDriver;
     OutputDriver outputDriver;
+    UserAccount userAccount;
 
     @BeforeEach
     void initEach() {
@@ -38,6 +40,7 @@ public class ListBookActionTest {
         outputDriver = mock(OutputDriver.class);
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
+        userAccount = mock(UserAccount.class);
         bookCollection = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
@@ -47,7 +50,7 @@ public class ListBookActionTest {
     @DisplayName("verify perform on menu list")
     @Test
     void actOnMenuList() {
-        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver);
+        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver, userAccount);
         verify(outputDriver).printBookList(bookDetails);
         verify(library,times(2)).getLibraryItemDetails(ItemType.BOOK);
     }

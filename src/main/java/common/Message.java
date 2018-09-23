@@ -20,4 +20,8 @@ public class Message {
     public final static String MENU_SEPERATOR = "=";
     public static final String LIST_MOVIES = "List Movie";
     public static final String RETURN_MOVIE = "Return Movie";
+    public static final String LOG_IN = "Log In";
+    public static final String LOG_IN_USER_NOT_FOUND = "No such user found";
+    public static final String LOG_IN_USER_FOUND = "Successfully logged in";
+    public static final String PLEASE_LOG_IN = "Please log in to access this functionality";
 }

@@ -2,6 +2,7 @@ package modelTest.library;
 
 import controller.LibraryManagementSystem;
 import model.library.*;
+import model.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,11 +29,13 @@ class LibraryTest {
     Collection<Item> expectedListAfterCheckout;
     Collection<Item> expectedListAfterReturn;
     LibraryManagementSystem libraryManagementSystem;
+    UserAccount userAccount;
 
     @BeforeEach
     void initEach() {
         inputMockDriver = new InputDriver();
         outputMockDriver = mock(OutputDriver.class);
+        userAccount = mock(UserAccount.class);
 
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
@@ -41,7 +44,7 @@ class LibraryTest {
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
 
         library =  new Library( new LibraryItemRepository().generateDefaultItemList());
-        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver, library);
+        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver, library, userAccount);
     }
 
     @DisplayName("Should get the default library book list correctly")

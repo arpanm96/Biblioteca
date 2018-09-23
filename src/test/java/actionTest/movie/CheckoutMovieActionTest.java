@@ -5,6 +5,8 @@ import controller.MainMenu;
 import model.library.ItemType;
 import model.library.Library;
 import model.library.LibraryItemRepository;
+import model.user.User;
+import model.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,7 @@ import static org.mockito.Mockito.when;
 
 public class CheckoutMovieActionTest {
 
+    UserAccount userAccount;
     Collection<String> movieDetails;
 
     Library library;
@@ -30,6 +33,7 @@ public class CheckoutMovieActionTest {
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
+        userAccount = mock(UserAccount.class);
         movieDetails = library.getLibraryItemDetails(ItemType.MOVIE);
     }
 
@@ -37,7 +41,7 @@ public class CheckoutMovieActionTest {
     @Test
     void shouldNotCheckoutMovie() {
         when(inputDriver.getUserInput()).thenReturn("A Random Movie");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver);
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.UNSUCCESSFUL_MOVIE_CHECKOUT);
     }
@@ -46,7 +50,7 @@ public class CheckoutMovieActionTest {
     @Test
     void shouldCheckoutMovie() {
         when(inputDriver.getUserInput()).thenReturn("Shawshank Redemption");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver);
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_CHECKOUT);
     }

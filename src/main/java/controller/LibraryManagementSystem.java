@@ -2,6 +2,7 @@ package controller;
 
 import common.Message;
 import model.library.Library;
+import model.user.UserAccount;
 import view.InputDriver;
 import view.OutputDriver;
 
@@ -14,11 +15,13 @@ public class LibraryManagementSystem {
     private InputDriver inputDriver;
     private OutputDriver outputDriver;
     private Library library;
+    private UserAccount userAccount;
 
-    public LibraryManagementSystem(InputDriver inputDriver, OutputDriver outputDriver, Library library) {
+    public LibraryManagementSystem(InputDriver inputDriver, OutputDriver outputDriver, Library library,UserAccount userAccount) {
         this.inputDriver = inputDriver;
         this.outputDriver = outputDriver;
         this.library = library;
+        this.userAccount = userAccount;
     }
 
     private boolean isValidInput(int choice) {
@@ -26,7 +29,7 @@ public class LibraryManagementSystem {
     }
 
     private void displayMenuChoice(int choice) {
-        MainMenu.values()[choice - 1].perform(library, inputDriver, outputDriver);
+        MainMenu.values()[choice - 1].perform(library, inputDriver, outputDriver, userAccount);
     }
 
     public void start() {

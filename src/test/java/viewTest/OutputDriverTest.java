@@ -3,6 +3,8 @@ package viewTest;
 import controller.LibraryManagementSystem;
 import model.library.LibraryItemRepository;
 import model.library.ItemType;
+import model.user.User;
+import model.user.UserAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -24,14 +26,16 @@ class OutputDriverTest {
     Library library;
     Collection<Book> booksList;
     LibraryManagementSystem libraryManagementSystem;
+    UserAccount userAccount;
     @BeforeEach
      void initEach() {
         outputDriver = new OutputDriver();
         Book booksMock1 = mock(Book.class);
         Book booksMock2 = mock(Book.class);
+        userAccount = mock(UserAccount.class);
         booksList = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
         library = new Library( new LibraryItemRepository().generateDefaultItemList());
-        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputDriver, library);
+        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputDriver, library, userAccount);
     }
 
     @Disabled

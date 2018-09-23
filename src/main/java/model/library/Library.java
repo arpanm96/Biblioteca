@@ -1,7 +1,10 @@
 package model.library;
 
+import model.user.User;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /*
@@ -11,6 +14,8 @@ A class for a library containing books
 public class Library {
     private Collection<Item> itemList;
     private Collection<Item> itemToBeReturnedList;
+    private Map<Item, User> itemToBeReturnedByUser;
+    private User loggedInUser;
 
     public Library(Collection<Item> itemList) {
         itemToBeReturnedList = new ArrayList<>();
@@ -34,6 +39,18 @@ public class Library {
         }
         return false;
     }
+
+/*    public boolean checkoutItemByUser(Item itemToBeCheckedOut,User user) {
+        for (Map m: Map.Entry<String,String>) {
+            if (item.equals(itemToBeCheckedOut)) {
+                itemToBeReturnedList.add(item);
+                itemList.remove(item);
+                return true;
+            }
+        }
+        return false;
+    }*/
+
 
     public boolean returnItem(Item returnItem) {
         if (itemToBeReturnedList != null && this.containsItem(returnItem)) {
