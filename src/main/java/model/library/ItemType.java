@@ -16,6 +16,5 @@ public enum ItemType {
             return "Name,Year,Director,Movie Rating";
         }
     };
-
     public abstract String getItemHeaders();
 }

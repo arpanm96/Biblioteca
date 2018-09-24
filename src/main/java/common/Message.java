@@ -34,4 +34,5 @@ public class Message {
     public static final String UNSUCCESSFUL_ITEM_CHECKOUT = "That item is not available.";
     public static final String SUCCESSFUL_ITEM_CHECKOUT = "Thank you! Enjoy the item.";
     public static final String LIST_CHECKED_OUT_ITEMS = "List checked out items.";
+    public static final String USER_INFORMATION = "User Information";
 }

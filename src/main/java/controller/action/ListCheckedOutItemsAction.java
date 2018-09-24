@@ -9,6 +9,7 @@ import view.InputDriver;
 import view.OutputDriver;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /*
@@ -20,14 +21,22 @@ public class ListCheckedOutItemsAction implements Action {
     public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAction userAction) {
         Collection<Item> checkedOutItemsList = userAction.getCurrentlyLoggedInUser().getCurrentCheckedOutItems();
 
-        outputDriver.printItemList(checkedOutItemsList.stream().
+        List<String> bookDetails = checkedOutItemsList.stream().
                 filter(item -> item.getItemType().equals(ItemType.BOOK)).
                 map(item -> (item.toString())).
-                collect(Collectors.toList()), ItemType.BOOK.getItemHeaders());
+                collect(Collectors.toList());
 
-        outputDriver.printItemList(checkedOutItemsList.stream().
+        List<String> movieDetails = checkedOutItemsList.stream().
                 filter(item -> item.getItemType().equals(ItemType.MOVIE)).
                 map(item -> (item.toString())).
-                collect(Collectors.toList()), ItemType.MOVIE.getItemHeaders());
+                collect(Collectors.toList());
+
+        if (!bookDetails.isEmpty()) {
+            outputDriver.printItemList(bookDetails, ItemType.BOOK.getItemHeaders());
+        }
+
+        if (!movieDetails.isEmpty()) {
+            outputDriver.printItemList(movieDetails, ItemType.MOVIE.getItemHeaders());
+        }
     }
 }

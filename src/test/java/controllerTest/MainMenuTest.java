@@ -53,13 +53,4 @@ class MainMenuTest {
     void shouldReturnQuitMessage() {
         assertEquals("Quit", MainMenu.QUIT.toString());
     }
-
-    @Disabled
-    @DisplayName("should call perform on Checkout")
-    @Test
-    void ShouldCallPerformOnCheckout() {
-        when(inputDriver.getMenuChoiceFromUser()).thenReturn(3).thenReturn(9);
-        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
-        verify(action).act(library, inputDriver, outputDriver, userAccount);
-    }
 }

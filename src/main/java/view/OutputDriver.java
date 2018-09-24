@@ -17,7 +17,7 @@ public class OutputDriver {
         System.out.println(Message.WELCOME);
     }
 
-    public void printItemList(Collection<String> itemDetails,String header) {
+    public void printItemList(Collection<String> itemDetails, String header) {
         ArrayList<String> items = new ArrayList<>(itemDetails);
         items.add(0, header);
         printFormattedList(items);
@@ -38,7 +38,7 @@ public class OutputDriver {
     public void printMainMenu() {
         printMenuSeparator();
         for (MainMenu menu : MainMenu.values()) {
-            System.out.println((menu.ordinal() +1)  + "  " + menu);
+            System.out.println((menu.ordinal() + 1) + "  " + menu);
         }
         printMenuSeparator();
     }

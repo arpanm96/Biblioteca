@@ -36,7 +36,7 @@ public class LibraryManagementSystem {
         outputDriver.printWelcomeMessage();
     }
 
-    public void operateMainMenu() throws ArrayIndexOutOfBoundsException{
+    public void operateMainMenu() throws ArrayIndexOutOfBoundsException {
         int choice = 0;
         do {
             outputDriver.printMainMenu();
@@ -47,7 +47,7 @@ public class LibraryManagementSystem {
                 outputDriver.print(Message.INVALID_INPUT);
                 choice = INDEX_OFFSET;
             }
-        }while(!MainMenu.values()[choice-1].equals(MainMenu.QUIT));
+        } while (!MainMenu.values()[choice - 1].equals(MainMenu.QUIT));
     }
 
 }

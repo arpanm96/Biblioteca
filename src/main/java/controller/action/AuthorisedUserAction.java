@@ -20,10 +20,9 @@ public class AuthorisedUserAction implements Action {
 
     @Override
     public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAction userAction) {
-        if(userAction.isUserLoggedIn()) {
-            action.act(library,inputDriver,outputDriver, userAction);
-        }
-        else {
+        if (userAction.isUserLoggedIn()) {
+            action.act(library, inputDriver, outputDriver, userAction);
+        } else {
             outputDriver.print(Message.PLEASE_LOG_IN);
         }
     }

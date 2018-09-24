@@ -36,7 +36,7 @@ public class UserTest {
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
 
-        library =  new Library( new LibraryItemRepository().generateDefaultItemList());
+        library = new Library(new LibraryItemRepository().generateDefaultItemList());
         libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver, library, userAction);
 
         userAction = mock(UserAction.class);
@@ -49,7 +49,7 @@ public class UserTest {
     void shouldUpdateTheHobbitBookToTheUserCheckoutList() {
         when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
         library.checkoutItem(theHobbit, userAction);
-        verify(user).updateUserCheckoutItemList(theHobbit,CheckoutType.CHECKOUT);
+        verify(user).updateUserCheckoutItemList(theHobbit, CheckoutType.CHECKOUT);
     }
 
     @DisplayName("should update theHobbit in the checkedOut list of the user after checkout")
@@ -57,19 +57,19 @@ public class UserTest {
     void shouldUpdateTheHobbitBookToTheUserCheckoutListAfterCheckout() {
         when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
         assertTrue(library.checkoutItem(theHobbit, userAction));
-        verify(user).updateUserCheckoutItemList(theHobbit,CheckoutType.CHECKOUT);
+        verify(user).updateUserCheckoutItemList(theHobbit, CheckoutType.CHECKOUT);
 
         when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
         assertTrue(library.returnItem(theHobbit, userAction));
-        verify(user).updateUserCheckoutItemList(theHobbit,CheckoutType.RETURN);
+        verify(user).updateUserCheckoutItemList(theHobbit, CheckoutType.RETURN);
     }
 
-    @DisplayName("should update theHobbit in the checkedOut list of the user after checkout")
+    @DisplayName("should not update the lord of the ring book in the checkedOut list of the user after checkout")
     @Test
     void shouldNotRemoveTheLordOfTheRingsBookFromTheUserCheckoutListAfterCheckout() {
         when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
         assertTrue(library.checkoutItem(theHobbit, userAction));
-        verify(user).updateUserCheckoutItemList(theHobbit,CheckoutType.CHECKOUT);
+        verify(user).updateUserCheckoutItemList(theHobbit, CheckoutType.CHECKOUT);
 
         when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
         assertFalse(library.returnItem(theLordOfTheRings, userAction));

@@ -14,6 +14,6 @@ A class to perform the listing of all the books in the library
 public class ListBookAction implements Action {
     @Override
     public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAction userAction) {
-        outputDriver.printItemList(library.getLibraryItemDetails(ItemType.BOOK),ItemType.BOOK.getItemHeaders());
+        outputDriver.printItemList(library.getLibraryItemDetails(ItemType.BOOK), ItemType.BOOK.getItemHeaders());
     }
 }

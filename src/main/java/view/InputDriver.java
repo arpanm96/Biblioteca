@@ -16,7 +16,6 @@ public class InputDriver {
     public int getMenuChoiceFromUser() {
         return Integer.parseInt(scanner.nextLine());
     }
-
     public String getUserInput() {
         return scanner.nextLine();
     }
