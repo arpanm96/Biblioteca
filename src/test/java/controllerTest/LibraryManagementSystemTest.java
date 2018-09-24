@@ -5,7 +5,8 @@ import controller.LibraryManagementSystem;
 import controller.MainMenu;
 import model.library.LibraryItemRepository;
 import model.library.Library;
-import model.user.UserAccount;
+import model.user.User;
+import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,19 +19,22 @@ import static org.mockito.Mockito.*;
 class LibraryManagementSystemTest {
 
     public static final int QUIT_VALUE = MainMenu.values().length;
-    UserAccount userAccount;
+    //public static final int QUIT_VALUE = 9;
+    UserAction userAction;
     OutputDriver outputDriver;
     InputDriver inputDriver;
     Library library;
     LibraryManagementSystem libraryManagementSystem;
+    User user;
 
     @BeforeEach
     void initEach(){
+        user = new User("123-4567", "Arpan");
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());;
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());;
         library = new Library( new LibraryItemRepository().generateDefaultItemList());
-        libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAccount);
+        libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAction);
     }
 
     @DisplayName("should call the implicit functions of start")
@@ -38,15 +42,13 @@ class LibraryManagementSystemTest {
     void shouldCallImplicitFunctionsOfStart() {
         libraryManagementSystem.start();
         verify(outputDriver).printWelcomeMessage();
-        verify(outputDriver).printMainMenu();
     }
 
-    //@Disabled
     @DisplayName("should call the invalid choice on wrong input")
     @Test
     void shouldCallInvalidMenuChoiceFunction() {
         when(inputDriver.getMenuChoiceFromUser()).thenReturn(40).thenReturn(QUIT_VALUE);
-        libraryManagementSystem.performOnMenuChoice();
+        libraryManagementSystem.operateMainMenu();
         verify(inputDriver,times(2)).getMenuChoiceFromUser();
         verify(outputDriver).print(Message.INVALID_INPUT);
     }
@@ -55,7 +57,7 @@ class LibraryManagementSystemTest {
     @Test
     void shouldCallImplicitFunctionsOfMenuFor1Input() {
         when(inputDriver.getMenuChoiceFromUser()).thenReturn(QUIT_VALUE);
-        libraryManagementSystem.performOnMenuChoice();
+        libraryManagementSystem.operateMainMenu();
         verify(inputDriver).getMenuChoiceFromUser();
     }
 
@@ -63,10 +65,20 @@ class LibraryManagementSystemTest {
     @Test
     void shouldCallImplicitFunctionsOfMenuForListMenu() {
         when(inputDriver.getMenuChoiceFromUser()).thenReturn(1).thenReturn(QUIT_VALUE);
-        libraryManagementSystem.performOnMenuChoice();
+        libraryManagementSystem.operateMainMenu();
         verify(inputDriver,times(2)).getMenuChoiceFromUser();
-        verify(outputDriver).printMainMenu();
+        verify(outputDriver,times(2)).printMainMenu();
     }
 
+    @DisplayName("should know who has checked out The Hobbit book")
+    @Test
+    void shouldKnowWhoHasCheckedOutTheHobbit() {
+        userAction.logIn(user);
+        when(inputDriver.getUserInput()).thenReturn("The Hobbit");
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAction);
+        verify(inputDriver).getUserInput();
+        verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
+
+    }
 }
 

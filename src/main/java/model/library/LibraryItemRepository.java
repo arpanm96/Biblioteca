@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/*
+A class containing the initial books in the library
+*/
+
 public class LibraryItemRepository {
     Collection<Item> bookList;
 

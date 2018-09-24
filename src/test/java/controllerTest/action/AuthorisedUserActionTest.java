@@ -1,4 +1,4 @@
-package controllerTest.actionTest;
+package controllerTest.action;
 
 import common.Message;
 import controller.MainMenu;
@@ -6,7 +6,7 @@ import model.library.ItemType;
 import model.library.Library;
 import model.library.LibraryItemRepository;
 import model.user.User;
-import model.user.UserAccount;
+import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +26,7 @@ public class AuthorisedUserActionTest {
     Library library;
     InputDriver inputDriver;
     OutputDriver outputDriver;
-    UserAccount userAccount;
+    UserAction userAction;
     User user;
 
     @BeforeEach
@@ -34,7 +34,7 @@ public class AuthorisedUserActionTest {
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         user = new User("123-4567", "Arpan");
         movieDetails = library.getLibraryItemDetails(ItemType.MOVIE);
@@ -43,9 +43,9 @@ public class AuthorisedUserActionTest {
     @DisplayName("Should checkout book if user is logged in")
     @Test
     void checkoutBookOnlyIfLoggedIn() {
-        userAccount.logIn(user);
+        userAction.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
     }
@@ -54,16 +54,16 @@ public class AuthorisedUserActionTest {
     @Test
     void willNotCheckoutBookOnlyIfNotLoggedIn() {
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.PLEASE_LOG_IN);
     }
 
     @DisplayName("Should checkout movie if user is logged in")
     @Test
     void checkoutMovieOnlyIfLoggedIn() {
-        userAccount.logIn(user);
+        userAction.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("Shawshank Redemption");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_CHECKOUT);
     }
@@ -72,22 +72,22 @@ public class AuthorisedUserActionTest {
     @Test
     void willNotCheckoutMovieOnlyIfNotLoggedIn() {
         when(inputDriver.getUserInput()).thenReturn("Shawshank Redemption");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.PLEASE_LOG_IN);
     }
 
     @DisplayName("Should return book if user is logged in")
     @Test
     void shouldReturnBookOnlyIfTheUserIsLoggedIn() {
-        userAccount.logIn(user);
+        userAction.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
 
 
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.SUCCESSFUL_BOOK_RETURN);
     }
 
@@ -95,27 +95,27 @@ public class AuthorisedUserActionTest {
     @Test
     void shouldNotReturnBookIfTheUserIsNotLoggedIn() {
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.PLEASE_LOG_IN);
 
 
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver,times(2)).print(Message.PLEASE_LOG_IN);
     }
 
     @DisplayName("should return back a checked out movie")
     @Test
     void shouldReturnMovie() {
-        userAccount.logIn(user);
+        userAction.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("Se7en");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_CHECKOUT);
 
 
         when(inputDriver.getUserInput()).thenReturn("Se7en");
-        MainMenu.RETURN_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.RETURN_MOVIE.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_RETURN);
     }
 
@@ -123,12 +123,12 @@ public class AuthorisedUserActionTest {
     @Test
     void shouldNotReturnMovieIfUserIsNotLoggedIn() {
         when(inputDriver.getUserInput()).thenReturn("Se7en");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.PLEASE_LOG_IN);
 
 
         when(inputDriver.getUserInput()).thenReturn("Se7en");
-        MainMenu.RETURN_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.RETURN_MOVIE.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver,times(2)).print(Message.PLEASE_LOG_IN);
     }
 

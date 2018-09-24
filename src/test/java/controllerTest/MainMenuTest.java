@@ -1,41 +1,65 @@
 package controllerTest;
 
-import model.library.Book;
-import model.library.ItemType;
+import controller.Action;
+import controller.LibraryManagementSystem;
+import controller.MainMenu;
 import model.library.Library;
+import model.user.UserAction;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import view.InputDriver;
 import view.OutputDriver;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class MainMenuTest {
-
-    Book booksMock1;
-    Book booksMock2;
-    Book theHobbit;
-    Book theLordOfTheRings;
-    Collection<Book> bookCollection;
-    Collection<String> bookDetails;
 
     Library library;
     InputDriver inputDriver;
     OutputDriver outputDriver;
+    Action action;
+    UserAction userAccount;
+    LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAccount);
 
     @BeforeEach
     void initEach() {
+        action = mock(Action.class);
         library = mock(Library.class);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        booksMock1 = mock(Book.class);
-        booksMock2 = mock(Book.class);
-        bookCollection = new ArrayList<>(Arrays.asList(booksMock1, booksMock2));
-        bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
-        theHobbit = new Book("The Hobbit", "Tolkien", 1937);
-        theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
+        userAccount = mock(UserAction.class);
+        libraryManagementSystem = mock(LibraryManagementSystem.class);
+    }
+
+    @DisplayName("should return the List Movie message")
+    @Test
+    void shouldReturnListMovieMessage() {
+        assertEquals("List Movie", MainMenu.LIST_MOVIES.toString());
+    }
+
+    @DisplayName("should return the List Book message")
+    @Test
+    void shouldReturnListBookMessage() {
+        assertEquals("List Books", MainMenu.LIST_BOOKS.toString());
+    }
+
+    @DisplayName("should return the Quit message")
+    @Test
+    void shouldReturnQuitMessage() {
+        assertEquals("Quit", MainMenu.QUIT.toString());
+    }
+
+    @Disabled
+    @DisplayName("should call perform on Checkout")
+    @Test
+    void ShouldCallPerformOnCheckout() {
+        when(inputDriver.getMenuChoiceFromUser()).thenReturn(3).thenReturn(9);
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        verify(action).act(library, inputDriver, outputDriver, userAccount);
     }
 }

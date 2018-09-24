@@ -1,5 +1,8 @@
 package common;
 
+/*
+A class containing all the hard coded messages
+*/
 
 public class Message {
     public final static String WELCOME = "Welcome To Biblioteca";
@@ -21,10 +24,14 @@ public class Message {
     public static final String LIST_MOVIES = "List Movie";
     public static final String RETURN_MOVIE = "Return Movie";
     public static final String LOG_IN = "Log In";
-    public static final String LOG_IN_UNSUCCESSFUL = "No such user found";
-    public static final String LOG_IN_SUCCESSFUL = "Successfully logged in";
-    public static final String PLEASE_LOG_IN = "Please log in to access this functionality";
-    public static final String LOG_OUT = "Log Out";
-    public static final String LOG_OUT_SUCCESSFUL = "Logged out successfully";
-    public static final String LOG_OUT_UNSUCCESSFUL = "Not logged in already";
+    public static final String LOG_IN_UNSUCCESSFUL = "No such user found.";
+    public static final String LOG_IN_SUCCESSFUL = "Successfully logged in.";
+    public static final String PLEASE_LOG_IN = "Please log in to access this functionality.";
+    public static final String LOG_OUT = "Log Out.";
+    public static final String LOG_OUT_SUCCESSFUL = "Logged out successfully.";
+    public static final String LOG_OUT_UNSUCCESSFUL = "Not logged in already.";
+    public static final String EXIT_BIBLIOTECA = "Goodbye!";
+    public static final String UNSUCCESSFUL_ITEM_CHECKOUT = "That item is not available.";
+    public static final String SUCCESSFUL_ITEM_CHECKOUT = "Thank you! Enjoy the item.";
+    public static final String LIST_CHECKED_OUT_ITEMS = "List checked out items.";
 }

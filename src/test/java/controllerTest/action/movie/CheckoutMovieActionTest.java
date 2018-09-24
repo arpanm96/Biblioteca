@@ -1,4 +1,4 @@
-package controllerTest.actionTest.movie;
+package controllerTest.action.movie;
 
 import common.Message;
 import controller.MainMenu;
@@ -6,7 +6,7 @@ import model.library.ItemType;
 import model.library.Library;
 import model.library.LibraryItemRepository;
 import model.user.User;
-import model.user.UserAccount;
+import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 public class CheckoutMovieActionTest {
 
-    UserAccount userAccount;
+    UserAction userAction;
     Collection<String> movieDetails;
 
     Library library;
@@ -36,16 +36,16 @@ public class CheckoutMovieActionTest {
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());
         movieDetails = library.getLibraryItemDetails(ItemType.MOVIE);
     }
 
     @DisplayName("verify movie is not checked out")
     @Test
     void shouldNotCheckoutMovie() {
-        userAccount.logIn(user);
+        userAction.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("A Random Movie");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.UNSUCCESSFUL_MOVIE_CHECKOUT);
     }
@@ -53,9 +53,9 @@ public class CheckoutMovieActionTest {
     @DisplayName("verify movie is checked out")
     @Test
     void shouldCheckoutMovie() {
-        userAccount.logIn(user);
+        userAction.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("Shawshank Redemption");
-        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_MOVIE.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_CHECKOUT);
     }

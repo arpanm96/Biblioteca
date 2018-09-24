@@ -3,7 +3,7 @@ package modelTest.library;
 import controller.LibraryManagementSystem;
 import model.library.*;
 import model.user.User;
-import model.user.UserAccount;
+import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,14 +31,14 @@ class LibraryTest {
     Collection<Item> expectedListAfterCheckout;
     Collection<Item> expectedListAfterReturn;
     LibraryManagementSystem libraryManagementSystem;
-    UserAccount userAccount;
+    UserAction userAction;
     User user;
 
     @BeforeEach
     void initEach() {
         inputMockDriver = new InputDriver();
         outputMockDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());;
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());;
 
         booksMock1 = mock(Book.class);
         booksMock2 = mock(Book.class);
@@ -47,10 +47,10 @@ class LibraryTest {
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
 
         library =  new Library( new LibraryItemRepository().generateDefaultItemList());
-        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver, library, userAccount);
+        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver, library, userAction);
 
         user = new User("123-4567", "Arpan");
-        userAccount.logIn(user);
+        userAction.logIn(user);
     }
 
     @DisplayName("Should get the default library book list correctly")
@@ -68,7 +68,7 @@ class LibraryTest {
         expectedListAfterCheckout = new ArrayList<>(Arrays.asList(theLordOfTheRings));
 
         assertAll(() -> {
-            assertTrue(library.checkoutItem(theHobbit, userAccount));
+            assertTrue(library.checkoutItem(theHobbit, userAction));
             //assertEquals(expectedListAfterCheckout, itemCollection);
         });
     }
@@ -82,7 +82,7 @@ class LibraryTest {
         expectedListAfterCheckout = new ArrayList<>(Arrays.asList(theHobbit));
 
         assertAll(() -> {
-            assertTrue(library.checkoutItem(theLordOfTheRings, userAccount));
+            assertTrue(library.checkoutItem(theLordOfTheRings, userAction));
             assertEquals(expectedListAfterCheckout, itemCollection);
         });
     }
@@ -96,7 +96,7 @@ class LibraryTest {
         expectedListAfterCheckout = new ArrayList<>(Arrays.asList(theHobbit));
 
         assertAll(() -> {
-            assertFalse(library.checkoutItem(theLordOfTheRings, userAccount));
+            assertFalse(library.checkoutItem(theLordOfTheRings, userAction));
             assertEquals(expectedListAfterCheckout, itemCollection);
         });
     }
@@ -110,8 +110,8 @@ class LibraryTest {
         expectedListAfterReturn = new ArrayList<>(Arrays.asList(theLordOfTheRings, new Book("The Hobbit")));
 
         assertAll(() -> {
-            assertTrue(library.checkoutItem(theHobbit, userAccount));
-            assertTrue(library.returnItem(new Book("The Hobbit")));
+            assertTrue(library.checkoutItem(theHobbit, userAction));
+            assertTrue(library.returnItem(new Book("The Hobbit"), userAction));
             assertEquals(expectedListAfterReturn, itemCollection);
         });
     }
@@ -125,8 +125,8 @@ class LibraryTest {
         expectedListAfterReturn = new ArrayList<>(Arrays.asList(theHobbit, new Book("The Lord Of The Rings")));
 
         assertAll(() -> {
-            assertTrue(library.checkoutItem(theLordOfTheRings, userAccount));
-            assertTrue(library.returnItem(new Book("The Lord Of The Rings")));
+            assertTrue(library.checkoutItem(theLordOfTheRings, userAction));
+            assertTrue(library.returnItem(new Book("The Lord Of The Rings"), userAction));
             assertEquals(expectedListAfterReturn, itemCollection);
         });
     }
@@ -140,8 +140,8 @@ class LibraryTest {
         expectedListAfterReturn = new ArrayList<>(Arrays.asList(theLordOfTheRings));
 
         assertAll(() -> {
-            assertTrue(library.checkoutItem(theHobbit, userAccount));
-            assertFalse(library.returnItem(new Book("The Lord Of The Rings")));
+            assertTrue(library.checkoutItem(theHobbit, userAction));
+            assertFalse(library.returnItem(new Book("The Lord Of The Rings"), userAction));
             assertEquals(expectedListAfterReturn, itemCollection);
         });
     }

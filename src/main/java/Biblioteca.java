@@ -1,7 +1,7 @@
 import controller.LibraryManagementSystem;
 import model.library.LibraryItemRepository;
 import model.library.Library;
-import model.user.UserAccount;
+import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import view.InputDriver;
 import view.OutputDriver;
@@ -15,9 +15,10 @@ public class Biblioteca {
         InputDriver inputDriver = new InputDriver();
         OutputDriver outputDriver = new OutputDriver();
         Library library = new Library(new LibraryItemRepository().generateDefaultItemList());
-        UserAccount userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());
-        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAccount);
+        UserAction userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());
+        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(inputDriver,
+                                            outputDriver, library, userAction);
         libraryManagementSystem.start();
-        libraryManagementSystem.performOnMenuChoice();
+        libraryManagementSystem.operateMainMenu();
     }
 }

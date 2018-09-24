@@ -1,9 +1,9 @@
-package controllerTest.actionTest.user;
+package controllerTest.action.user;
 
 import common.Message;
 import controller.MainMenu;
 import model.library.Library;
-import model.user.UserAccount;
+import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 class LogOutActionTest {
 
     Library library;
-    UserAccount userAccount;
+    UserAction userAction;
 
     InputDriver inputDriver;
     OutputDriver outputDriver;
@@ -26,13 +26,13 @@ class LogOutActionTest {
         library = mock(Library.class);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());
     }
 
     @DisplayName("should not log out")
     @Test
     void shouldNotLogOut() {
-        MainMenu.LOG_OUT.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.LOG_OUT.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.LOG_OUT_UNSUCCESSFUL);
     }
 
@@ -40,11 +40,11 @@ class LogOutActionTest {
     @Test
     void shouldLogOut() {
         when(inputDriver.getUserInput()).thenReturn("123-4567").thenReturn("Arpan");
-        MainMenu.LOG_IN.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.LOG_IN.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver,times(2)).getUserInput();
         verify(outputDriver).print(Message.LOG_IN_SUCCESSFUL);
 
-        MainMenu.LOG_OUT.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.LOG_OUT.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.LOG_OUT_SUCCESSFUL);
     }
 }

@@ -3,11 +3,15 @@ package model.user;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class UserAccount {
+/*
+A class to manage user actions
+*/
+
+public class UserAction {
     private Collection<User> userCollection;
     private Collection<User> loggedInUser;
 
-    public UserAccount(Collection<User> userCollection) {
+    public UserAction(Collection<User> userCollection) {
         loggedInUser = new ArrayList<>();
         this.userCollection = userCollection;
     }

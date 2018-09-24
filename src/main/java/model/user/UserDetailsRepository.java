@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/*
+A class containing the registered users list for the library
+*/
+
 public class UserDetailsRepository {
     Collection<User> userList;
 

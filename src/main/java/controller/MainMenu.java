@@ -1,6 +1,7 @@
 package controller;
 
 import controller.action.AuthorisedUserAction;
+import controller.action.ListCheckedOutItemsAction;
 import controller.action.user.LogInAction;
 import controller.action.QuitAction;
 import controller.action.book.CheckOutBookAction;
@@ -12,9 +13,13 @@ import controller.action.movie.ReturnMovieAction;
 import controller.action.user.LogOutAction;
 import common.Message;
 import model.library.Library;
-import model.user.UserAccount;
+import model.user.UserAction;
 import view.InputDriver;
 import view.OutputDriver;
+
+/*
+An enum to display and initialize actions chosen by the user
+*/
 
 public enum MainMenu {
     LIST_BOOKS(Message.LIST_BOOKS, new ListBookAction()),
@@ -24,6 +29,7 @@ public enum MainMenu {
     CHECKOUT_MOVIE(Message.CHECKOUT_MOVIE, new AuthorisedUserAction(new CheckOutMovieAction())),
     RETURN_BOOK(Message.RETURN_BOOK, new AuthorisedUserAction(new ReturnBookAction())),
     RETURN_MOVIE(Message.RETURN_MOVIE, new AuthorisedUserAction(new ReturnMovieAction())),
+    LIST_CHECKED_OUT_ITEMS(Message.LIST_CHECKED_OUT_ITEMS, new AuthorisedUserAction(new ListCheckedOutItemsAction())),
     LOG_OUT(Message.LOG_OUT,new LogOutAction()),
     QUIT(Message.QUIT, new QuitAction()) {
     };
@@ -36,8 +42,8 @@ public enum MainMenu {
         this.action = action;
     }
 
-    public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAccount userAccount) {
-        this.action.act(library, inputDriver, outputDriver, userAccount);
+    public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAction userAction) {
+        this.action.act(library, inputDriver, outputDriver, userAction);
     }
 
     @Override

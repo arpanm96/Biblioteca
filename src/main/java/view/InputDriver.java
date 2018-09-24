@@ -2,6 +2,10 @@ package view;
 
 import java.util.Scanner;
 
+/*
+A class to perform all the input functions required for biblioteca
+*/
+
 public class InputDriver {
     private Scanner scanner;
 

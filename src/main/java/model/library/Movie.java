@@ -2,6 +2,10 @@ package model.library;
 
 import java.util.Objects;
 
+/*
+A class containing the movie details
+*/
+
 public class Movie implements Item {
     private String name;
     private String director;

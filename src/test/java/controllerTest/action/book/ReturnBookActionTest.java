@@ -1,4 +1,4 @@
-package controllerTest.actionTest.book;
+package controllerTest.action.book;
 
 import common.Message;
 import controller.MainMenu;
@@ -7,7 +7,7 @@ import model.library.LibraryItemRepository;
 import model.library.ItemType;
 import model.library.Library;
 import model.user.User;
-import model.user.UserAccount;
+import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ReturnBookActionTest {
-    UserAccount userAccount;
+    UserAction userAction;
     Book theHobbit;
     Book theLordOfTheRings;
     Collection<String> bookDetails;
@@ -37,7 +37,7 @@ public class ReturnBookActionTest {
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());;
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());;
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         theHobbit = new Book("The Hobbit", "Tolkien", 1937);
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
@@ -47,29 +47,29 @@ public class ReturnBookActionTest {
     @DisplayName("should not return back an already present book")
     @Test
     void shouldNotReturnBook() {
-        userAccount.logIn(user);
+        userAction.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("The Lord Of The Rings");
-        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
 
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.UNSUCCESSFUL_BOOK_RETURN);
     }
 
     @DisplayName("should return back a checked out book")
     @Test
     void shouldReturnBook() {
-        userAccount.logIn(user);
+        userAction.logIn(user);
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.CHECKOUT_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(inputDriver).getUserInput();
         verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
 
 
         when(inputDriver.getUserInput()).thenReturn("The Hobbit");
-        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver, userAccount);
+        MainMenu.RETURN_BOOK.perform(library, inputDriver, outputDriver, userAction);
         verify(outputDriver).print(Message.SUCCESSFUL_BOOK_RETURN);
     }
 }

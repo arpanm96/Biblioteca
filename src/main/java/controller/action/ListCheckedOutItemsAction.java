@@ -1,0 +1,33 @@
+package controller.action;
+
+import controller.Action;
+import model.library.Item;
+import model.library.ItemType;
+import model.library.Library;
+import model.user.UserAction;
+import view.InputDriver;
+import view.OutputDriver;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+/*
+A class to perform to the listing of all the currently checked out items of the user
+*/
+
+public class ListCheckedOutItemsAction implements Action {
+    @Override
+    public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAction userAction) {
+        Collection<Item> checkedOutItemsList = userAction.getCurrentlyLoggedInUser().getCurrentCheckedOutItems();
+
+        outputDriver.printItemList(checkedOutItemsList.stream().
+                filter(item -> item.getItemType().equals(ItemType.BOOK)).
+                map(item -> (item.toString())).
+                collect(Collectors.toList()), ItemType.BOOK.getItemHeaders());
+
+        outputDriver.printItemList(checkedOutItemsList.stream().
+                filter(item -> item.getItemType().equals(ItemType.MOVIE)).
+                map(item -> (item.toString())).
+                collect(Collectors.toList()), ItemType.MOVIE.getItemHeaders());
+    }
+}

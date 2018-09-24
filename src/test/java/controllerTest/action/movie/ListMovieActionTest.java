@@ -1,10 +1,10 @@
-package controllerTest.actionTest.movie;
+package controllerTest.action.movie;
 
 import controller.MainMenu;
 import model.library.ItemType;
 import model.library.Library;
 import model.library.Movie;
-import model.user.UserAccount;
+import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 
 public class ListMovieActionTest {
 
-    UserAccount userAccount;
+    UserAction userAction;
     Collection<Movie> movieDetails;
     Collection<String> bookDetails;
 
@@ -30,7 +30,7 @@ public class ListMovieActionTest {
 
     @BeforeEach
     void initEach() {
-        userAccount = new UserAccount(new UserDetailsRepository().generateDefaultUserList());;
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());;
         library = mock(Library.class);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
@@ -41,8 +41,8 @@ public class ListMovieActionTest {
     @DisplayName("verify list movies")
     @Test
     void shouldListMovies() {
-        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver, userAccount);
-        verify(outputDriver).printBookList(bookDetails);
+        MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver, userAction);
+        verify(outputDriver).printItemList(bookDetails,ItemType.BOOK.getItemHeaders());
         verify(library,times(2)).getLibraryItemDetails(ItemType.BOOK);
     }
 }

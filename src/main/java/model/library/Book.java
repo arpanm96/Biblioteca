@@ -3,6 +3,10 @@ package model.library;
 
 import java.util.Objects;
 
+/*
+A class containing book details
+*/
+
 public class Book implements Item {
     private String title;
     private String author;

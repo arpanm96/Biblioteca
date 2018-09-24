@@ -1,12 +1,9 @@
 package model.library;
 
-import model.user.User;
-import model.user.UserAccount;
+import model.user.UserAction;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /*
@@ -16,12 +13,9 @@ A class for a library containing books
 public class Library {
     private Collection<Item> itemList;
     private Collection<Item> itemToBeReturnedList;
-    private Map<Item, User> itemToBeReturnedByUser;
-    private User loggedInUser;
 
     public Library(Collection<Item> itemList) {
         itemToBeReturnedList = new ArrayList<>();
-        itemToBeReturnedByUser = new HashMap<>();
         this.itemList = itemList;
     }
 
@@ -32,10 +26,10 @@ public class Library {
                 collect(Collectors.toList());
     }
 
-    public boolean checkoutItem(Item itemToBeCheckedOut, UserAccount userAccount) {
+    public boolean checkoutItem(Item itemToBeCheckedOut, UserAction userAction) {
         for (Item item : itemList) {
             if (item.equals(itemToBeCheckedOut)) {
-                itemToBeReturnedByUser.put(item, userAccount.getCurrentlyLoggedInUser());
+                userAction.getCurrentlyLoggedInUser().updateUserCheckoutItemList(item, CheckoutType.CHECKOUT);
                 itemToBeReturnedList.add(item);
                 itemList.remove(item);
                 return true;
@@ -44,9 +38,9 @@ public class Library {
         return false;
     }
 
-    public boolean returnItem(Item returnItem) {
+    public boolean returnItem(Item returnItem, UserAction userAction) {
         if (itemToBeReturnedList != null && this.containsItem(returnItem)) {
-            itemList.add(returnItem);
+            userAction.getCurrentlyLoggedInUser().updateUserCheckoutItemList(returnItem, CheckoutType.RETURN);
             itemToBeReturnedList.remove(returnItem);
             return true;
         }
@@ -56,6 +50,7 @@ public class Library {
     private boolean containsItem(Item returnItem) {
         for (Item item : itemToBeReturnedList) {
             if (item.equals(returnItem)) {
+                itemList.add(item);
                 return true;
             }
         }

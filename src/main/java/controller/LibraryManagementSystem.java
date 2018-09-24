@@ -2,7 +2,7 @@ package controller;
 
 import common.Message;
 import model.library.Library;
-import model.user.UserAccount;
+import model.user.UserAction;
 import view.InputDriver;
 import view.OutputDriver;
 
@@ -15,41 +15,39 @@ public class LibraryManagementSystem {
     private InputDriver inputDriver;
     private OutputDriver outputDriver;
     private Library library;
-    private UserAccount userAccount;
+    private UserAction userAction;
 
-    public LibraryManagementSystem(InputDriver inputDriver, OutputDriver outputDriver, Library library, UserAccount userAccount) {
+    public LibraryManagementSystem(InputDriver inputDriver, OutputDriver outputDriver, Library library, UserAction userAction) {
         this.inputDriver = inputDriver;
         this.outputDriver = outputDriver;
         this.library = library;
-        this.userAccount = userAccount;
+        this.userAction = userAction;
     }
 
     private boolean isValidInput(int choice) {
         return choice <= MainMenu.values().length && choice >= INDEX_OFFSET;
     }
 
-    private void displayMenuChoice(int choice) {
-        MainMenu.values()[choice - 1].perform(library, inputDriver, outputDriver, userAccount);
+    private void performOnMainMenu(int choice) {
+        MainMenu.values()[choice - 1].perform(library, inputDriver, outputDriver, userAction);
     }
 
     public void start() {
         outputDriver.printWelcomeMessage();
-        outputDriver.printMainMenu();
     }
 
-    public void performOnMenuChoice() {
+    public void operateMainMenu() throws ArrayIndexOutOfBoundsException{
         int choice = 0;
-        while ((choice = getMainMenuChoice(inputDriver)) != MainMenu.values().length) {
+        do {
+            outputDriver.printMainMenu();
+            choice = inputDriver.getMenuChoiceFromUser();
             if (isValidInput(choice)) {
-                displayMenuChoice(choice);
+                performOnMainMenu(choice);
             } else {
                 outputDriver.print(Message.INVALID_INPUT);
+                choice = INDEX_OFFSET;
             }
-            outputDriver.printMainMenu();
-        }
+        }while(!MainMenu.values()[choice-1].equals(MainMenu.QUIT));
     }
 
-    private int getMainMenuChoice(InputDriver inputDriver) {
-        return inputDriver.getMenuChoiceFromUser();
-    }
 }

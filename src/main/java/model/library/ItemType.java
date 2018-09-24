@@ -1,5 +1,9 @@
 package model.library;
 
+/*
+An enum to store the type of the item
+*/
+
 public enum ItemType {
     BOOK {
         @Override

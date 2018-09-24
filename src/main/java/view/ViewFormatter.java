@@ -3,6 +3,10 @@ package view;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/*
+A class to format the details to be displayed in a certain manner
+*/
+
 public class ViewFormatter {
     public Collection<String> formatAccordingToColomns(Collection<String> bookDetails) {
         Collection<String> formattedString = new ArrayList<>();
