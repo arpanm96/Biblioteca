@@ -42,7 +42,7 @@ public class ListMovieActionTest {
     @Test
     void shouldListMovies() {
         MainMenu.LIST_BOOKS.perform(library, inputDriver, outputDriver, userAction);
-        verify(outputDriver).printItemList(bookDetails,ItemType.BOOK.getItemHeaders());
+        verify(outputDriver).printList(bookDetails,ItemType.BOOK.getItemHeaders());
         verify(library,times(2)).getLibraryItemDetails(ItemType.BOOK);
     }
 }

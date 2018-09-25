@@ -13,7 +13,7 @@ public enum ItemType {
     }, MOVIE {
         @Override
         public String getItemHeaders() {
-            return "Name,Year,Director,Movie Rating";
+            return "Name,Year,Movie Rating,Director";
         }
     };
     public abstract String getItemHeaders();

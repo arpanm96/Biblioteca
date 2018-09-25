@@ -39,7 +39,7 @@ public class Book implements Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return title.trim().equalsIgnoreCase(book.title.trim());
+        return title.trim().equals(book.title.trim());
     }
 
     @Override

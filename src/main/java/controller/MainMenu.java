@@ -12,6 +12,7 @@ import controller.action.movie.ListMovieAction;
 import controller.action.movie.ReturnMovieAction;
 import controller.action.user.LogOutAction;
 import common.Message;
+import controller.action.user.UserInformationAction;
 import model.library.Library;
 import model.user.UserAction;
 import view.InputDriver;
@@ -23,7 +24,7 @@ An enum to display and initialize actions chosen by the user
 
 public enum MainMenu {
     LIST_BOOKS(Message.LIST_BOOKS, new ListBookAction(), AccessType.ALWAYS),
-    LIST_MOVIES(Message.LIST_MOVIES, new ListMovieAction() , AccessType.ALWAYS),
+    LIST_MOVIES(Message.LIST_MOVIES, new ListMovieAction(), AccessType.ALWAYS),
     LOG_IN(Message.LOG_IN, new LogInAction(), AccessType.NOT_LOGGED_IN),
     CHECKOUT_BOOK(Message.CHECKOUT_BOOK, new AuthorisedUserAction(new CheckOutBookAction()), AccessType.LOGGED_IN),
     CHECKOUT_MOVIE(Message.CHECKOUT_MOVIE, new AuthorisedUserAction(new CheckOutMovieAction()), AccessType.LOGGED_IN),
@@ -47,7 +48,16 @@ public enum MainMenu {
     }
 
     public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAction userAction) {
-        this.action.act(library, inputDriver, outputDriver, userAction);
+        if (accessType.isMenuAccessValid(userAction)) {
+            this.action.act(library, inputDriver, outputDriver, userAction);
+        }
+        else {
+            outputDriver.print(Message.INVALID_INPUT);
+        }
+    }
+
+    public boolean isValidMenu(UserAction userAction) {
+        return this.accessType.isMenuAccessValid(userAction);
     }
 
     @Override

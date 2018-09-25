@@ -27,7 +27,7 @@ class QuitActionTest {
         library = mock(Library.class);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());;
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());
     }
 
     @DisplayName("should exit successfully")

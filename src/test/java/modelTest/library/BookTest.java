@@ -34,6 +34,12 @@ class BookTest {
     void shouldPrintTheLordOfTheRings() {
         assertEquals("The Lord Of The Rings,Tolkien,1954",theLordOfTheRings.toString());
     }
+
+    @DisplayName("should return true if two books are same")
+    @Test
+    void shouldReturnTrueIfTwoBooksAreSame() {
+        assertEquals(new Book("The Lord Of The Rings","Tolkien",1954),theLordOfTheRings);
+    }
 }
 
 

@@ -29,7 +29,7 @@ class LibraryManagementSystemTest {
 
     @BeforeEach
     void initEach(){
-        user = new User("123-4567", "Arpan");
+        user = new User("123-4567", "Arpan","a@gmail.com", 12345);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
         userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());;
@@ -67,7 +67,7 @@ class LibraryManagementSystemTest {
         when(inputDriver.getMenuChoiceFromUser()).thenReturn(1).thenReturn(QUIT_VALUE);
         libraryManagementSystem.operateMainMenu();
         verify(inputDriver,times(2)).getMenuChoiceFromUser();
-        verify(outputDriver,times(2)).printMainMenu();
+        verify(outputDriver,times(2)).printMainMenu(libraryManagementSystem.getValidMenuCollection(userAction));
     }
 
     @DisplayName("should know who has checked out The Hobbit book")

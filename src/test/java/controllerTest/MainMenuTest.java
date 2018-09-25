@@ -4,18 +4,21 @@ import controller.Action;
 import controller.LibraryManagementSystem;
 import controller.MainMenu;
 import model.library.Library;
+import model.library.LibraryItemRepository;
+import model.user.User;
 import model.user.UserAction;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import view.InputDriver;
 import view.OutputDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 class MainMenuTest {
 
@@ -24,16 +27,18 @@ class MainMenuTest {
     OutputDriver outputDriver;
     Action action;
     UserAction userAccount;
+    User user;
     LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAccount);
 
     @BeforeEach
     void initEach() {
+        user = new User("123-4567","Arpan");
         action = mock(Action.class);
-        library = mock(Library.class);
+        library = new Library( new LibraryItemRepository().generateDefaultItemList());;
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
-        userAccount = mock(UserAction.class);
-        libraryManagementSystem = mock(LibraryManagementSystem.class);
+        userAccount = new UserAction(new UserDetailsRepository().generateDefaultUserList());
+        libraryManagementSystem = new LibraryManagementSystem(inputDriver, outputDriver, library, userAccount);
     }
 
     @DisplayName("should return the List Movie message")
@@ -52,5 +57,25 @@ class MainMenuTest {
     @Test
     void shouldReturnQuitMessage() {
         assertEquals("Quit", MainMenu.QUIT.toString());
+    }
+
+    @DisplayName("should return true for list book menu")
+    @Test
+    void shouldReturnTrueForListBooks() {
+        assertTrue(MainMenu.LIST_BOOKS.isValidMenu(userAccount));
+    }
+
+    @DisplayName("should return true for checkout book menu since the user is not logged in")
+    @Test
+    void shouldReturnFalseForCheckoutBooks() {
+        assertFalse(MainMenu.CHECKOUT_BOOK.isValidMenu(userAccount));
+    }
+
+    @DisplayName("should return true for checkout book menu since the user is logged in")
+    @Test
+    void shouldReturnTrueForCheckoutBookIfTheUserIsLoggedIn() {
+        userAccount.logIn(user);
+        assertTrue(userAccount.isUserLoggedIn());
+        assertTrue(MainMenu.CHECKOUT_BOOK.isValidMenu(userAccount));
     }
 }

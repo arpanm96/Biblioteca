@@ -32,11 +32,11 @@ public class ListCheckedOutItemsAction implements Action {
                 collect(Collectors.toList());
 
         if (!bookDetails.isEmpty()) {
-            outputDriver.printItemList(bookDetails, ItemType.BOOK.getItemHeaders());
+            outputDriver.printList(bookDetails, ItemType.BOOK.getItemHeaders());
         }
 
         if (!movieDetails.isEmpty()) {
-            outputDriver.printItemList(movieDetails, ItemType.MOVIE.getItemHeaders());
+            outputDriver.printList(movieDetails, ItemType.MOVIE.getItemHeaders());
         }
     }
 }

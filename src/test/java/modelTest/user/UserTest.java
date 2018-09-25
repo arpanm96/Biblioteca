@@ -4,19 +4,20 @@ import controller.LibraryManagementSystem;
 import model.library.*;
 import model.user.UserAction;
 import model.user.User;
+import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import view.InputDriver;
 import view.OutputDriver;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class UserTest {
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+
+class UserTest {
 
     Book theHobbit;
     Book theLordOfTheRings;
@@ -24,9 +25,9 @@ public class UserTest {
     InputDriver inputMockDriver;
     OutputDriver outputMockDriver;
     Library library;
-    LibraryManagementSystem libraryManagementSystem;
     UserAction userAction;
-    User user;
+    User user1;
+    User user2;
 
     @BeforeEach
     void initEach() {
@@ -37,41 +38,50 @@ public class UserTest {
         theLordOfTheRings = new Book("The Lord Of The Rings", "Tolkien", 1954);
 
         library = new Library(new LibraryItemRepository().generateDefaultItemList());
-        libraryManagementSystem = new LibraryManagementSystem(inputMockDriver, outputMockDriver, library, userAction);
 
-        userAction = mock(UserAction.class);
-        user = mock(User.class);
-        userAction.logIn(user);
+        userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());
+
+        user1 = new User("123-4567", "Arpan", "a@gmail.com", 12345);
+        user2 = new User("234-5678", "Arpan", "b@gmail.com", 12345);
+
+        userAction.logIn(user1);
     }
 
-    @DisplayName("should update theHobbit in the checkedOut list of the user")
+    @DisplayName("should print users correctly")
+    @Test
+    void shouldPrintUsersCorrectly() {
+        assertEquals("123-4567,a@gmail.com,12345",user1.toString());
+        assertEquals("234-5678,b@gmail.com,12345",user2.toString());
+    }
+
+    @DisplayName("should update theHobbit in the checkedOut list of the userMock")
     @Test
     void shouldUpdateTheHobbitBookToTheUserCheckoutList() {
-        when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
-        library.checkoutItem(theHobbit, userAction);
-        verify(user).updateUserCheckoutItemList(theHobbit, CheckoutType.CHECKOUT);
+        assertTrue(library.checkoutItem(theHobbit,userAction));
+        ArrayList<Item> expectedList = new ArrayList<>(Arrays.asList(theHobbit));
+        assertEquals(expectedList,userAction.getCurrentlyLoggedInUser().getCurrentCheckedOutItems());
     }
 
-    @DisplayName("should update theHobbit in the checkedOut list of the user after checkout")
-    @Test
-    void shouldUpdateTheHobbitBookToTheUserCheckoutListAfterCheckout() {
-        when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
-        assertTrue(library.checkoutItem(theHobbit, userAction));
-        verify(user).updateUserCheckoutItemList(theHobbit, CheckoutType.CHECKOUT);
 
-        when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
-        assertTrue(library.returnItem(theHobbit, userAction));
-        verify(user).updateUserCheckoutItemList(theHobbit, CheckoutType.RETURN);
+    @DisplayName("should delete theHobbit from the checkedOut list of the user after returning")
+    @Test
+    void shouldUpdateTheHobbitBookFromTheUserCheckoutListAfterReturn() {
+        assertTrue(library.checkoutItem(theHobbit,userAction));
+        ArrayList<Item> expectedList = new ArrayList<>(Arrays.asList(theHobbit));
+        assertEquals(expectedList,userAction.getCurrentlyLoggedInUser().getCurrentCheckedOutItems());
+
+        assertTrue(library.returnItem(theHobbit,userAction));
+        assertEquals(new ArrayList<>(),userAction.getCurrentlyLoggedInUser().getCurrentCheckedOutItems());
     }
 
     @DisplayName("should not update the lord of the ring book in the checkedOut list of the user after checkout")
     @Test
-    void shouldNotRemoveTheLordOfTheRingsBookFromTheUserCheckoutListAfterCheckout() {
-        when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
-        assertTrue(library.checkoutItem(theHobbit, userAction));
-        verify(user).updateUserCheckoutItemList(theHobbit, CheckoutType.CHECKOUT);
+    void shouldNotUpdateTheLordOfTheRingsBookToTheUserCheckoutListAfterCheckout() {
+        assertTrue(library.checkoutItem(theHobbit,userAction));
+        ArrayList<Item> expectedList = new ArrayList<>(Arrays.asList(theHobbit));
+        assertEquals(expectedList,userAction.getCurrentlyLoggedInUser().getCurrentCheckedOutItems());
 
-        when(userAction.getCurrentlyLoggedInUser()).thenReturn(user);
-        assertFalse(library.returnItem(theLordOfTheRings, userAction));
+        assertFalse(library.returnItem(theLordOfTheRings,userAction));
+        assertEquals(expectedList,userAction.getCurrentlyLoggedInUser().getCurrentCheckedOutItems());
     }
 }

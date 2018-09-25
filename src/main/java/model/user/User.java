@@ -14,12 +14,21 @@ A class containing the user details and perform user operations
 public class User {
     private String id;
     private String password;
+    private String emailAddress;
+    private int phoneNumber;
     private Collection<Item> checkoutItemCollection;
+
+    public User(String id, String password, String emailAddress, int phoneNumber) {
+        this.id = id;
+        this.password = password;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        checkoutItemCollection = new ArrayList<>();
+    }
 
     public User(String id, String password) {
         this.id = id;
         this.password = password;
-        checkoutItemCollection = new ArrayList<>();
     }
 
     public void updateUserCheckoutItemList(Item item, CheckoutType checkoutType) {
@@ -42,5 +51,10 @@ public class User {
 
     public Collection<Item> getCurrentCheckedOutItems() {
         return checkoutItemCollection;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + emailAddress + "," + phoneNumber;
     }
 }

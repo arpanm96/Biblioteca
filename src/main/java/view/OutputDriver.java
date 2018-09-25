@@ -5,6 +5,7 @@ import controller.MainMenu;
 import model.library.ItemType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Stream;
 
@@ -17,8 +18,8 @@ public class OutputDriver {
         System.out.println(Message.WELCOME);
     }
 
-    public void printItemList(Collection<String> itemDetails, String header) {
-        ArrayList<String> items = new ArrayList<>(itemDetails);
+    public void printList(Collection<String> listDetails, String header) {
+        ArrayList<String> items = new ArrayList<>(listDetails);
         items.add(0, header);
         printFormattedList(items);
     }
@@ -35,9 +36,9 @@ public class OutputDriver {
         System.out.println();
     }
 
-    public void printMainMenu() {
+    public void printMainMenu(Collection<MainMenu> validMenu) {
         printMenuSeparator();
-        for (MainMenu menu : MainMenu.values()) {
+        for (MainMenu menu : validMenu) {
             System.out.println((menu.ordinal() + 1) + "  " + menu);
         }
         printMenuSeparator();
@@ -45,5 +46,11 @@ public class OutputDriver {
 
     public void print(String message) {
         System.out.println(message);
+    }
+
+    public void printUser(String user) {
+        ArrayList<String> userDetails = new ArrayList<>(Arrays.asList(user));
+        userDetails.add(0,"Name,Email Address,Information");
+        printFormattedList(userDetails);
     }
 }

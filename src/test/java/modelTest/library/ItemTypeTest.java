@@ -17,6 +17,6 @@ class ItemTypeTest {
     @DisplayName("should return correct movie headers")
     @Test
     void shouldReturnMovieHeaders() {
-        assertEquals("Name,Year,Director,Movie Rating",ItemType.MOVIE.getItemHeaders());
+        assertEquals("Name,Year,Movie Rating,Director",ItemType.MOVIE.getItemHeaders());
     }
 }

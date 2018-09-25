@@ -23,6 +23,7 @@ class LogInActionTest {
 
     @BeforeEach
     void initEach() {
+        library = mock(Library.class);
         inputDriver = mock(InputDriver.class);
         outputDriver = mock(OutputDriver.class);
         userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());

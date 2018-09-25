@@ -33,7 +33,7 @@ public class Movie implements Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return name.trim().equalsIgnoreCase(movie.name.trim());
+        return name.trim().equals(movie.name.trim());
     }
 
     @Override

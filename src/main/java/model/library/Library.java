@@ -38,22 +38,24 @@ public class Library {
         return false;
     }
 
-    public boolean returnItem(Item returnItem, UserAction userAction) {
-        if (itemToBeReturnedList != null && this.containsItem(returnItem)) {
-            userAction.getCurrentlyLoggedInUser().updateUserCheckoutItemList(returnItem, CheckoutType.RETURN);
+    public boolean returnItem(Item item, UserAction userAction) {
+        Item returnItem = containsItem(item);
+        if (itemToBeReturnedList != null && returnItem != null &&
+                userAction.getCurrentlyLoggedInUser().getCurrentCheckedOutItems().contains(item)) {
+            userAction.getCurrentlyLoggedInUser().updateUserCheckoutItemList(item, CheckoutType.RETURN);
+            itemList.add(returnItem);
             itemToBeReturnedList.remove(returnItem);
             return true;
         }
         return false;
     }
 
-    private boolean containsItem(Item returnItem) {
+    private Item containsItem(Item returnItem) {
         for (Item item : itemToBeReturnedList) {
             if (item.equals(returnItem)) {
-                itemList.add(item);
-                return true;
+                return item;
             }
         }
-        return false;
+        return null;
     }
 }

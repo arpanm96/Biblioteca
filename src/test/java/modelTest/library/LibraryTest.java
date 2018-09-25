@@ -69,7 +69,6 @@ class LibraryTest {
 
         assertAll(() -> {
             assertTrue(library.checkoutItem(theHobbit, userAction));
-            //assertEquals(expectedListAfterCheckout, itemCollection);
         });
     }
 

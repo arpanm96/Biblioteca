@@ -7,17 +7,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserActionTest {
 
-    User unknownUser = new User("000-0000","Unknown");
-    User knownUser = new User("123-4567", "Arpan");
+    User unknownUser;
+    User knownUser;
     UserAction userAction;
     @BeforeEach
     void initEach() {
         userAction = new UserAction(new UserDetailsRepository().generateDefaultUserList());
+        knownUser = new User("123-4567", "Arpan");
+        unknownUser = new User("000-0000","Unknown");
     }
 
     @DisplayName("should not allow login to unknown users")
@@ -38,14 +39,30 @@ class UserActionTest {
         assertTrue(userAction.logIn(knownUser));
     }
 
-    @DisplayName("should allow user to log out if they are already logged in")
+    @DisplayName("should return true if there is currently someone logged in")
     @Test
-    void shouldReturnTrueIfUserIsLoggedOut() {
-        assertTrue(userAction.logIn(knownUser));
-        assertTrue(userAction.logOut());
+    void shouldReturnTrueIfThereIsCurrentlyALoggedUser() {
+        userAction.logIn(knownUser);
+        assertTrue(userAction.isUserLoggedIn());
     }
 
-    @DisplayName("shouldn't allow user to log out if they are not already logged in")
+    @DisplayName("should return true if the currently logged user is correct")
+    @Test
+    void shouldReturnTrueIfTheCurrentlyLoggedUserIsCorrect() {
+        userAction.logIn(knownUser);
+        assertEquals(knownUser,userAction.getCurrentlyLoggedInUser());
+    }
+
+    @DisplayName("should allow userMock to log out if they are already logged in")
+    @Test
+    void shouldReturnTrueIfUserIsLoggedOut() {
+        assertAll(()-> {
+            assertTrue(userAction.logIn(knownUser));
+            assertTrue(userAction.logOut());
+        });
+    }
+
+    @DisplayName("shouldn't allow userMock to log out if they are not already logged in")
     @Test
     void shouldReturnFalseIfUserIsLoggedOut() {
         assertFalse(userAction.logOut());

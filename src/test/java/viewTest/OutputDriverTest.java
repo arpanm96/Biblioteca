@@ -33,14 +33,14 @@ class OutputDriverTest {
     @DisplayName("should display the list of books correctly")
     @Test
     void shouldDisplayBookListCorrectly() {
-        outputDriver.printItemList(library.getLibraryItemDetails(ItemType.BOOK), ItemType.BOOK.getItemHeaders());
+        outputDriver.printList(library.getLibraryItemDetails(ItemType.BOOK), ItemType.BOOK.getItemHeaders());
     }
 
     @Disabled
     @DisplayName("should display the list of books correctly")
     @Test
     void shouldDisplayMenuCorrectly() {
-        outputDriver.printMainMenu();
+        outputDriver.printMainMenu(libraryManagementSystem.getValidMenuCollection(userAction));
     }
 }
 

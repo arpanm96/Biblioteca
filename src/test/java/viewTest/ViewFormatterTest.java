@@ -36,9 +36,6 @@ public class ViewFormatterTest {
     void shouldReturnTheBookDetailInFormattedManner() {
         bookDetails = library.getLibraryItemDetails(ItemType.BOOK);
         ViewFormatter viewFormatter = new ViewFormatter();
-        String firstRow = "Title,Author,Year Published";
-        //outputDriver.printBookList(viewFormatter.formatAccordingToColomns(new ArrayList<>(Arrays.asList(firstRow))));
-        //outputDriver.printBookList(viewFormatter.formatAccordingToColomns(bookDetails));
         assertEquals(new ArrayList<>(Arrays.asList("The Hobbit            " +
                 "        Tolkien                       1937                          ","The Lord Of The Rings" +
                         "         Tolkien                       1954                          "))

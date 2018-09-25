@@ -14,6 +14,6 @@ A class to perform the listing of all the movies in the library
 public class ListMovieAction implements Action {
     @Override
     public void act(Library library, InputDriver inputDriver, OutputDriver outputDriver, UserAction userAction) {
-        outputDriver.printItemList(library.getLibraryItemDetails(ItemType.MOVIE), ItemType.MOVIE.getItemHeaders());
+        outputDriver.printList(library.getLibraryItemDetails(ItemType.MOVIE), ItemType.MOVIE.getItemHeaders());
     }
 }

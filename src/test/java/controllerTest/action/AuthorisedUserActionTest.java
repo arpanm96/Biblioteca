@@ -9,6 +9,7 @@ import model.user.User;
 import model.user.UserAction;
 import model.user.UserDetailsRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import view.InputDriver;
@@ -17,6 +18,11 @@ import view.OutputDriver;
 import java.util.Collection;
 
 import static org.mockito.Mockito.*;
+
+/*
+Some of the tests are disabled because it was written earlier when the all the menus were
+displayed together and the user had to be logged in to access those menus.
+ */
 
 public class AuthorisedUserActionTest {
 
@@ -50,6 +56,7 @@ public class AuthorisedUserActionTest {
         verify(outputDriver).print(Message.SUCCESSFUL_BOOK_CHECKOUT);
     }
 
+    @Disabled
     @DisplayName("Should not checkout book if user is not logged in even though the book is present and will ask to login")
     @Test
     void willNotCheckoutBookOnlyIfNotLoggedIn() {
@@ -68,6 +75,7 @@ public class AuthorisedUserActionTest {
         verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_CHECKOUT);
     }
 
+    @Disabled
     @DisplayName("Should not checkout movie if user is not logged in")
     @Test
     void willNotCheckoutMovieOnlyIfNotLoggedIn() {
@@ -91,6 +99,7 @@ public class AuthorisedUserActionTest {
         verify(outputDriver).print(Message.SUCCESSFUL_BOOK_RETURN);
     }
 
+    @Disabled
     @DisplayName("Should not return book if user is not logged in")
     @Test
     void shouldNotReturnBookIfTheUserIsNotLoggedIn() {
@@ -119,6 +128,7 @@ public class AuthorisedUserActionTest {
         verify(outputDriver).print(Message.SUCCESSFUL_MOVIE_RETURN);
     }
 
+    @Disabled
     @DisplayName("should return back a checked out movie")
     @Test
     void shouldNotReturnMovieIfUserIsNotLoggedIn() {

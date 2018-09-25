@@ -16,7 +16,8 @@ public class UserDetailsRepository {
     }
 
     public Collection<User> generateDefaultUserList() {
-        return new ArrayList<>(Arrays.asList(new User("234-5678", "Arpan"),
-                new User("123-4567", "Arpan")));
+        return new ArrayList<>(Arrays.asList(new User("234-5678", "Arpan",
+                        "b@gmail.com", 12345),
+                new User("123-4567", "Arpan", "a@gmail.com", 12345)));
     }
 }

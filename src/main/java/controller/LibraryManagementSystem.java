@@ -6,6 +6,10 @@ import model.user.UserAction;
 import view.InputDriver;
 import view.OutputDriver;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 /*
 A class to drive together the whole library management system
 */
@@ -39,7 +43,7 @@ public class LibraryManagementSystem {
     public void operateMainMenu() throws ArrayIndexOutOfBoundsException {
         int choice = 0;
         do {
-            outputDriver.printMainMenu();
+            outputDriver.printMainMenu(getValidMenuCollection(userAction));
             choice = inputDriver.getMenuChoiceFromUser();
             if (isValidInput(choice)) {
                 performOnMainMenu(choice);
@@ -49,5 +53,12 @@ public class LibraryManagementSystem {
             }
         } while (!MainMenu.values()[choice - 1].equals(MainMenu.QUIT));
     }
+
+    public Collection<MainMenu> getValidMenuCollection(UserAction userAction) {
+        return Arrays.stream(MainMenu.values()).
+                filter((mainMenu -> mainMenu.isValidMenu(userAction))).
+                collect(Collectors.toList());
+    }
+
 
 }

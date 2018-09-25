@@ -20,13 +20,18 @@ public class UserAction {
         if (!userCollection.contains(user) || loggedInUser.contains(user)) {
             return false;
         }
-        loggedInUser.add(user);
+        loggedInUser.add(getUser(user));
         return true;
+    }
+
+    private User getUser(User inputUser) {
+        return userCollection.stream().filter((user)-> user.equals(inputUser)).
+        findFirst().get();
     }
 
     public boolean logOut() {
         if (isUserLoggedIn()) {
-            loggedInUser.clear();
+            loggedInUser.remove(getCurrentlyLoggedInUser());
             return true;
         }
         return false;
